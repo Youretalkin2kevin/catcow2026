@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cat & Cow Festival 2026 — Programm</title>
+<style>
+  :root {
+    --cream: #FFFFFF;
+    --ink: #2B2620;
+    --rose: #D6365B;
+    --rose-deep: #B82548;
+    --olive: #6F7D45;
+    --olive-deep: #57622F;
+    --line: rgba(43,38,32,0.12);
+
+    --cat-yoga: #BFE2A8;        --cat-yoga-deep: #5C8A3E;
+    --cat-meditation: #C9C3EC;  --cat-meditation-deep: #6B5FAE;
+    --cat-workshop: #A9DDEA;    --cat-workshop-deep: #2E7E93;
+    --cat-musik: #F3E48A;       --cat-musik-deep: #9C8A1E;
+    --cat-kreis: #EFA197;       --cat-kreis-deep: #B8412F;
+    --cat-kids: #F3C281;        --cat-kids-deep: #B06A1F;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    height: 100%;
+  }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .mono { font-family: "SF Mono", "Cascadia Code", Consolas, Menlo, Monaco, monospace; }
+  .serif { font-family: Georgia, "Times New Roman", serif; }
+
+  /* ---------- Header (compact) ---------- */
+  .hero {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 8px 14px;
+    background: #FCEFD8;
+    border-bottom: 1px solid var(--line);
+    flex-wrap: wrap;
+    flex-shrink: 0;
+  }
+  .hero h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 19px;
+    margin: 0;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .hero .eyebrow {
+    font-family: "SF Mono", "Cascadia Code", Consolas, Menlo, Monaco, monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: var(--rose-deep);
+    white-space: nowrap;
+  }
+  .hero .sub, .hero .offline-note { display: none; }
+
+  /* ---------- Day tabs ---------- */
+  .day-nav {
+    flex-shrink: 0;
+    background: rgba(255,255,255,0.95);
+    border-bottom: 1px solid var(--line);
+    padding: 7px 14px;
+  }
+  .day-nav-inner {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .day-nav-inner::-webkit-scrollbar { display: none; }
+  .day-tab {
+    flex: 0 0 auto;
+    font-family: "SF Mono", "Cascadia Code", Consolas, Menlo, Monaco, monospace;
+    font-size: 11px;
+    padding: 6px 13px;
+    border-radius: 999px;
+    border: 1.5px solid var(--line);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+  }
+  .day-tab .d { display: block; font-weight: 700; font-size: 12px; }
+  .day-tab .date { display: block; opacity: 0.55; font-size: 8.5px; margin-top: 1px; }
+  .day-tab.active {
+    background: var(--rose);
+    border-color: var(--rose);
+    color: white;
+  }
+  .day-tab.active .date { opacity: 0.85; }
+
+  /* ---------- Controls / legend ---------- */
+  .controls {
+    flex-shrink: 0;
+    padding: 7px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--line);
+  }
+  .legend {
+    font-family: "SF Mono", "Cascadia Code", Consolas, Menlo, Monaco, monospace;
+    font-size: 10.5px;
+    color: #6b6155;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    flex-wrap: wrap;
+  }
+  .legend-item { display: inline-flex; align-items: center; gap: 5px; }
+  .legend .dot {
+    width: 10px; height: 10px; border-radius: 3px; display: inline-block;
+    border: 1px solid rgba(43,38,32,0.15);
+  }
+  .legend .dot.cat-yoga { background: var(--cat-yoga); }
+  .legend .dot.cat-meditation { background: var(--cat-meditation); }
+  .legend .dot.cat-workshop { background: var(--cat-workshop); }
+  .legend .dot.cat-musik { background: var(--cat-musik); }
+  .legend .dot.cat-kreis { background: var(--cat-kreis); }
+  .legend .dot.cat-kids { background: var(--cat-kids); }
+
+  #search {
+    font-size: 13px;
+    padding: 6px 13px;
+    border-radius: 999px;
+    border: 1.5px solid var(--line);
+    background: white;
+    color: var(--ink);
+    min-width: 180px;
+    outline: none;
+    font-family: inherit;
+  }
+  #search:focus { border-color: var(--rose); }
+  #search::placeholder { color: #b3a896; }
+
+  /* ---------- Special banner ---------- */
+  .special-banner { padding: 8px 14px 0; flex-shrink: 0; }
+  .special-banner .strip {
+    background: var(--olive);
+    color: var(--cream);
+    border-radius: 9px;
+    padding: 8px 14px;
+    font-family: "SF Mono", "Cascadia Code", Consolas, Menlo, Monaco, monospace;
+    font-size: 11px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .special-banner .strip b { font-family: inherit; font-weight: 700; }
+
+  /* ---------- Grid ---------- */
+  #panels {
+    flex: 1 1 auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .day-panel { display: none; flex: 1 1 auto; overflow: hidden; flex-direction: column; }
+  .day-panel.active { display: flex; }
+
+  .grid-wrap {
+    flex: 1 1 auto;
+    padding: 10px 14px 14px;
+    overflow: auto;
+    scroll-snap-type: x proximate;
+    position: relative;
+  }
+  .grid > .col { scroll-snap-align: start; }
+  .day-panel { position: relative; }
+  .day-panel::after {
+    content: "";
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 28px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9));
+    pointer-events: none;
+  }
+  .grid {
+    display: grid;
+    gap: 8px;
+    grid-auto-flow: column;
+    grid-auto-columns: 150px;
+    align-items: start;
+    height: 100%;
+  }
+  .col-head {
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.01em;
+    padding: 7px 11px;
+    border-radius: 8px 8px 0 0;
+    color: white;
+    background: #8a7f70;
+    margin-bottom: 6px;
+    flex-shrink: 0;
+  }
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  .card {
+    border: 1px solid var(--line);
+    border-left: 5px solid transparent;
+    border-radius: 8px;
+    padding: 10px 12px;
+    text-decoration: none;
+    color: var(--ink);
+    display: block;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    cursor: default;
+    position: relative;
+  }
+  .card.cat-yoga       { background: #EAF6E2; border-left-color: var(--cat-yoga-deep); }
+  .card.cat-meditation { background: #EFEDF9; border-left-color: var(--cat-meditation-deep); }
+  .card.cat-workshop   { background: #E6F6FA; border-left-color: var(--cat-workshop-deep); }
+  .card.cat-musik      { background: #FBF7DE; border-left-color: var(--cat-musik-deep); }
+  .card.cat-kreis      { background: #FBE9E6; border-left-color: var(--cat-kreis-deep); }
+  .card.cat-kids       { background: #FCEEDA; border-left-color: var(--cat-kids-deep); }
+
+  .card.linked { cursor: pointer; }
+  .card.linked:active,
+  .card.linked:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(43,38,32,0.16);
+  }
+  .card.linked::after {
+    content: "→";
+    position: absolute;
+    top: 9px;
+    right: 10px;
+    font-size: 12px;
+    color: var(--ink);
+    opacity: 0.35;
+  }
+  .card .time {
+    font-family: "SF Mono", "Cascadia Code", Consolas, Menlo, Monaco, monospace;
+    font-size: 10.5px;
+    color: var(--ink);
+    opacity: 0.65;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+  .card .title {
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1.28;
+    margin-bottom: 2px;
+  }
+  .card .people {
+    font-size: 11.5px;
+    color: #5c5448;
+    font-style: italic;
+  }
+  .card.dim { opacity: 0.28; }
+
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 16px; }
+    .hero .eyebrow { font-size: 9px; }
+    .grid { grid-auto-columns: 132px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card, .day-tab { transition: none; }
+  }
+
+  :focus-visible { outline: 2px solid var(--rose); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>Cat &amp; Cow</h1>
+  <span class="eyebrow">01.–05. Juli 2026 · Mondsee bei Leipzig</span>
+</header>
+
+<nav class="day-nav">
+  <div class="day-nav-inner" id="dayNav"></div>
+</nav>
+
+<div class="controls">
+  <div class="legend">
+    <span class="legend-item"><span class="dot cat-yoga"></span>Yoga</span>
+    <span class="legend-item"><span class="dot cat-meditation"></span>Meditation</span>
+    <span class="legend-item"><span class="dot cat-workshop"></span>Workshop</span>
+    <span class="legend-item"><span class="dot cat-musik"></span>Musik/Performance</span>
+    <span class="legend-item"><span class="dot cat-kreis"></span>Kreis/Zeremonie</span>
+    <span class="legend-item"><span class="dot cat-kids"></span>Spielwiese Kidsspace</span>
+  </div>
+  <input type="text" id="search" placeholder="Suche…">
+</div>
+
+<div id="panels"></div>
+
+<script>
+const FESTIVAL_DATA = [
+{
+    day: "Mittwoch",
+    date: "01.07.2026",
+    special: [{ time: "16.00–17.00", label: "ERÖFFNUNGSZEREMONIE (Freundeskreis)" }],
+    slots: [
+      { time: "17.15–18.45", location: "Kuhstall", title: "Himalayan Kriya Yoga & Sound Journey", people: "Charlotte & Ivano", url: "https://catcow.de/himalayan-kriya-yoga-sound-journey-charlotte-ivano/", cat: "yoga" },
+      { time: "19.30–20.50", location: "Kuhstall", title: "Konzert", people: "Mantra Kollektiv", url: "https://catcow.de/mantrakollektiv/", cat: "musik" },
+      { time: "21.40–23.00", location: "Kuhstall", title: "Konzert", people: "Natan Rabin & Cale", url: "https://catcow.de/ceremonial-concert-natan-rabin-cale-alit/", cat: "musik" },
+      { time: "17.30–19.00", location: "Cathouse", title: "Conscious Chakra Flow", people: "Mari, Uwe & Valentin", url: "https://catcow.de/conscious-chakra-flow-mari-valentin-uwe/", cat: "yoga" },
+      { time: "20.30–23.30", location: "Cathouse", title: "ConsciousCuddleExperience – KuschelReise", people: "Nicole Bader", url: "https://catcow.de/consciouscuddleexperience-kuschelreise-nicole/", cat: "workshop" },
+      { time: "17.30–19.00", location: "Om Tempel", title: "Theater, das verbindet", people: "Jenny Thamm", url: "https://catcow.de/theater-das-verbindet-jenni/", cat: "musik" },
+      { time: "17.15–18.45", location: "Saustall", title: "PlayFightGround", people: "Maria Paula", url: "https://catcow.de/playfightground-maria-paula/", cat: "workshop" },
+      { time: "17.30–19.00", location: "Kräuterweide", title: "Voice Expedition Workshop", people: "Elayn", url: "https://catcow.de/voice-expedition-elayn/", cat: "workshop" },
+      { time: "19.30", location: "SUP Yoga", title: "Einführung ins Stand Up Paddling", people: "", url: "", cat: "workshop" },
+      { time: "20.30", location: "SUP Yoga", title: "Sunset WOGA mit Klangschale & Live Gesang", people: "", url: "", cat: "meditation" },
+      { time: "16.00–17.00", location: "Kidsspace", title: "Kinderschminken/Tattoo", people: "Lina", url: "", cat: "kids" },
+      { time: "16.00–17.00", location: "Kidsspace", title: "Eröffnungsritual", people: "", url: "", cat: "kids" },
+      { time: "17.00–18.00", location: "Kidsspace", title: "Pois basteln", people: "Lina", url: "", cat: "kids" },
+      { time: "17.00–18.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "18.00–19.00", location: "Kidsspace", title: "Kinderschminken", people: "Myana", url: "", cat: "kids" },
+      { time: "18.00–19.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" }
+    ]
+  },
+  {
+    day: "Donnerstag",
+    date: "02.07.2026",
+    slots: [
+      { time: "08.30–10.00", location: "Kuhstall", title: "Ashtanga Yoga – The old school orginal", people: "Ronald Steiner", url: "https://catcow.de/yoga-doc-ronald-steiner/", cat: "yoga" },
+      { time: "10.30–12.00", location: "Kuhstall", title: "workBREATHout", people: "Andreas Koschwitz", url: "https://catcow.de/power-hatha-yoga-workbreathout-andreas/", cat: "meditation" },
+      { time: "12.45–14.15", location: "Kuhstall", title: "Embody the light Yoga", people: "Ulrike Manhart", url: "https://catcow.de/embody-the-light-yoga-ulrike/", cat: "yoga" },
+      { time: "15.00–16.30", location: "Kuhstall", title: "Shamanic Kundalini", people: "Sashiva", url: "https://catcow.de/shamanic-kundalini-sashiva/", cat: "yoga" },
+      { time: "17.00–18.30", location: "Kuhstall", title: "YinYoga Focusing", people: "Natalie Merl", url: "", cat: "yoga" },
+      { time: "19.30–20.30", location: "Kuhstall", title: "Konzert", people: "Seom", url: "https://catcow.de/seom-konzert/", cat: "musik" },
+      { time: "21.30–23.30", location: "Kuhstall", title: "Konzert", people: "Pachamantra", url: "https://catcow.de/pacha-mantra/", cat: "musik" },
+      { time: "07.30–08.30", location: "Cathouse", title: "Kundalini Yoga", people: "Sarah Creations", url: "https://catcow.de/kundalini-yoga-sarah-creations/", cat: "yoga" },
+      { time: "09.00–10.30", location: "Cathouse", title: "Tief Verwurzelt", people: "Steffi & Kerstin", url: "", cat: "yoga" },
+      { time: "11.00–12.30", location: "Cathouse", title: "AUM – von Veresh (Osho)", people: "Yuni & Paddi", url: "https://catcow.de/aum-awareness-understanding-meditation-yuni-paddi/", cat: "meditation" },
+      { time: "13.00–14.30", location: "Cathouse", title: "Human Design WS", people: "Claudia Heinicke", url: "https://catcow.de/human-design-embodied-claudia/", cat: "workshop" },
+      { time: "15.00–16.30", location: "Cathouse", title: "Herzöffnung – Hypnose & Klangreise in deine Selbstliebe", people: "Sarah Löber", url: "https://catcow.de/herzoeffnung-hypnose-klangreise-in-deine-selbstliebe-sarah/", cat: "meditation" },
+      { time: "17.00–18.30", location: "Cathouse", title: "Vortrag: Rohkost for Lowcost", people: "Samu Raw Spirit", url: "https://catcow.de/vortrag-fuer-50e-im-monat-gesund-leben-rohkoestlich-vegan-samu-rawspirit/", cat: "workshop" },
+      { time: "20.00–00.00", location: "Cathouse", title: "Tantric Slow Dating", people: "Soluna & Patrick", url: "https://catcow.de/tantric-slow-dating-soluna-patrick/", cat: "workshop" },
+      { time: "08.30–10.00", location: "Om Tempel", title: "TaoTwerkShop", people: "Aurora Elyson", url: "https://catcow.de/tao-twerkshop-aurora-elysion/", cat: "workshop" },
+      { time: "10.30–12.30", location: "Om Tempel", title: "Human Design WS", people: "", url: "", cat: "workshop" },
+      { time: "13.00–14.30", location: "Om Tempel", title: "Herzöffnung – Hypnose & Klangreise", people: "Sarah Löber", url: "https://catcow.de/herzoeffnung-hypnose-klangreise-in-deine-selbstliebe-sarah/", cat: "meditation" },
+      { time: "15.00–16.30", location: "Om Tempel", title: "Selbstliebe – tägl. Praktische Routine", people: "Alexandra David", url: "", cat: "workshop" },
+      { time: "17.00–18.30", location: "Om Tempel", title: "Vortrag: Rohkost for Lowcost", people: "Samu Raw Spirit", url: "https://catcow.de/vortrag-fuer-50e-im-monat-gesund-leben-rohkoestlich-vegan-samu-rawspirit/", cat: "workshop" },
+      { time: "20.00–00.00", location: "Om Tempel", title: "Tantric Slow Dating", people: "Soluna & Patrick", url: "https://catcow.de/tantric-slow-dating-soluna-patrick/", cat: "workshop" },
+      { time: "08.15–09.45", location: "Saustall", title: "Yoga & Spiraldynamik", people: "Sven Schmieder", url: "", cat: "yoga" },
+      { time: "10.15–11.45", location: "Saustall", title: "Tri Yoga", people: "Janett", url: "https://catcow.de/tri-yoga-mit-janett/", cat: "yoga" },
+      { time: "12.15–13.45", location: "Saustall", title: "Flex Yoga", people: "Sven Petri", url: "", cat: "yoga" },
+      { time: "14.30–16.00", location: "Saustall", title: "Selbstliebe – tägl. Praktische Routine", people: "Alexandra David", url: "", cat: "workshop" },
+      { time: "16.30–18.30", location: "Saustall", title: "Somatic Speed Dating", people: "Mona Rauber", url: "https://catcow.de/somatic-speed-dating-mona/", cat: "workshop" },
+      { time: "10.00–12.00", location: "Strand", title: "Peace within – Kakao, Breath & Sound", people: "Jennya & Friends", url: "https://catcow.de/peace-within-kakao-breath-sound-jennya-stella-yan-lukas/", cat: "kreis" },
+      { time: "12.30–14.30", location: "Strand", title: "Trommel WS", people: "Georg", url: "https://catcow.de/trommelworkshop-georg/", cat: "workshop" },
+      { time: "15.30–16.30", location: "Strand", title: "Konzert", people: "Yilmaz", url: "https://catcow.de/live-spiritual-pop-yilmaz-koshua/", cat: "musik" },
+      { time: "17.30–19.30", location: "Strand", title: "DoubleWave ~ Ecstatic Dance Journey", people: "Maik & Riccarda", url: "https://catcow.de/doublewave-ecstatic-dance-journey-maik-riccarda/", cat: "musik" },
+      { time: "09.00–10.30", location: "Freundeskreis", title: "Wildkräuterwanderung", people: "Bibi Kräuterfee", url: "https://catcow.de/wildkraeuterspaziergang-bibi/", cat: "workshop" },
+      { time: "10.00–12.00", location: "Freundeskreis", title: "Geschichtenbaum", people: "Michelle Jacobi", url: "", cat: "kreis" },
+      { time: "11.00–12.30", location: "Freundeskreis", title: "Christian & Simon – Haka Tanz", people: "", url: "https://catcow.de/haka-maori-krafttanz-fuer-alle-simon-christian/", cat: "musik" },
+      { time: "12.45–13.05", location: "Freundeskreis", title: "Erdfriedenmeditation", people: "Falk & Nicole", url: "https://catcow.de/erdfrieden-durch-selbstfrieden-falk-nicole/", cat: "meditation" },
+      { time: "14.00–15.30", location: "Freundeskreis", title: "Vergebungsritual – zurück in die Verbindung", people: "Inga Jagadamba Stendel", url: "https://catcow.de/vergebungsritual-inga/", cat: "kreis" },
+      { time: "16.30–17.30", location: "Freundeskreis", title: "Hoola Hoop WS", people: "Lena Flowart", url: "https://catcow.de/hula-hoop-lena-flowart/", cat: "workshop" },
+      { time: "17.00–19.00", location: "Freundeskreis", title: "Geschichtenbaum", people: "Michelle Jacobi", url: "", cat: "kreis" },
+      { time: "09.30–11.00", location: "Kräuterweide", title: "Seelenschreiben / Heilschreiben / Manifestieren", people: "Matthias Müller", url: "https://catcow.de/seelenschreiben-heilschreiben-manifestieren-matthias-mueller/", cat: "workshop" },
+      { time: "11.30–13.00", location: "Kräuterweide", title: "Nordische Runen", people: "Dorte Janussen", url: "", cat: "workshop" },
+      { time: "12.45–13.00", location: "Kräuterweide", title: "Erdfriedenmeditation", people: "Falk & Nicole", url: "https://catcow.de/erdfrieden-durch-selbstfrieden-falk-nicole/", cat: "meditation" },
+      { time: "14.00–16.30", location: "Kräuterweide", title: "OM Kreis – Klang, Stimme, innere Resonanz", people: "Christian & Simon", url: "https://catcow.de/om-kreis-alina/", cat: "kreis" },
+      { time: "16.00–17.30", location: "Kräuterweide", title: "Goldene 8", people: "Falk & Nicole", url: "https://catcow.de/die-goldene-acht-nicole-falk/", cat: "workshop" },
+      { time: "09.00–10.00", location: "Feuerjurte", title: "Daily Sharing", people: "", url: "", cat: "kreis" },
+      { time: "11.00–12.30", location: "Feuerjurte", title: "Tantrische Orgasmuskontrolle", people: "Christian Strangfeld", url: "", cat: "workshop" },
+      { time: "12.45–13.05", location: "Feuerjurte", title: "Handpan WS für Anfänger", people: "Max", url: "https://catcow.de/handpan-workshop-fuer-anfaenger-max/", cat: "workshop" },
+      { time: "17.00–19.00", location: "Feuerjurte", title: "Impro Theater WS", people: "Meike & Tim", url: "https://catcow.de/improtheater-workshop-tim-meike/", cat: "musik" },
+      { time: "11.00–12.30", location: "AcroYoga", title: "AcroYoga Opening Jam", people: "", url: "", cat: "yoga" },
+      { time: "12.30–13.45", location: "AcroYoga", title: "Introduction TwoMenHigh", people: "", url: "", cat: "yoga" },
+      { time: "14.30–15.45", location: "AcroYoga", title: "Creative Flips & Rolls", people: "", url: "", cat: "yoga" },
+      { time: "16.00–17.15", location: "AcroYoga", title: "Handstand", people: "", url: "", cat: "yoga" },
+      { time: "17.30–19.00", location: "AcroYoga", title: "Therapeutisches Fliegen", people: "", url: "", cat: "yoga" },
+      { time: "Täglich 12.00–15.00", location: "SUP Yoga", title: "Sup Verleih mit Einweisung (inkl. Schwimmweste für Kinder)", people: "", url: "", cat: "workshop" },
+      { time: "09.00", location: "SUP Yoga", title: "WOGAflow! Das neue Flow Konzept auf dem Wasser", people: "", url: "", cat: "yoga" },
+      { time: "10.30", location: "SUP Yoga", title: "Einführungskurs ins Stand Up Paddling", people: "", url: "", cat: "workshop" },
+      { time: "09.00–10.00", location: "Kidsspace", title: "Tanzen", people: "Maren & Anne", url: "", cat: "kids" },
+      { time: "10.00–11.00", location: "Kidsspace", title: "Poi und Jonglage-Workshop", people: "Vlad", url: "", cat: "kids" },
+      { time: "10.00–11.00", location: "Kidsspace", title: "Traumfänger gestalten (Max. 10 Kids / ab 5 J.)", people: "Myana", url: "", cat: "kids" },
+      { time: "10.00–11.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "11.00–12.00", location: "Kidsspace", title: "Frauenkreis mit Kindern – \"Mutterschaft als spirituelle Lebensphase\"", people: "Lila Caroluna", url: "", cat: "kids" },
+      { time: "11.00–12.00", location: "Kidsspace", title: "Familien Yoga", people: "Sarah", url: "", cat: "kids" },
+      { time: "11.00–12.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "12.00–13.00", location: "Kidsspace", title: "Kamishibai Geschichten", people: "Isabell", url: "", cat: "kids" },
+      { time: "12.00–13.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "13.00–14.00", location: "Kidsspace", title: "Waldbaden & Lehmgesichter 2h (Max. 10 Kids / ab 5 J.)", people: "Susann", url: "", cat: "kids" },
+      { time: "13.00–14.00", location: "Kidsspace", title: "Kinder Yoga (6-12 Jahre)", people: "Sarah", url: "", cat: "kids" },
+      { time: "13.00–14.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "14.00–15.00", location: "Kidsspace", title: "Kissenschlacht", people: "Christian", url: "", cat: "kids" },
+      { time: "14.00–15.00", location: "Kidsspace", title: "Kinderschminken", people: "Anja", url: "", cat: "kids" },
+      { time: "15.00–16.00", location: "Kidsspace", title: "Arbeiten mit Ton (Max. 15 Kids)", people: "Maren", url: "", cat: "kids" },
+      { time: "15.00–16.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "16.00–17.00", location: "Kidsspace", title: "Kinderschminken", people: "Christian", url: "", cat: "kids" },
+      { time: "16.00–17.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "17.00–18.00", location: "Kidsspace", title: "Riesenseifenblasen zum Selbermachen", people: "Lien & Maté", url: "", cat: "kids" },
+      { time: "17.00–18.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "18.00–19.00", location: "Kidsspace", title: "Krafttiere basteln", people: "Sarah", url: "", cat: "kids" },
+      { time: "18.00–19.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" }
+    ]
+  },
+  {
+    day: "Freitag",
+    date: "03.07.2026",
+    special: [{ time: "13.00–14.00", label: "Stillezeit – (Pssss..)" }],
+    slots: [
+      { time: "08.45–10.15", location: "Kuhstall", title: "Power Hatha Yoga", people: "Andreas Koschwitz", url: "https://catcow.de/power-hatha-yoga-workbreathout-andreas/", cat: "yoga" },
+      { time: "10.45–12.45", location: "Kuhstall", title: "Deep Yin Yoga + Soundhealing", people: "Marko Kreddig, Paulina & Niyam", url: "https://catcow.de/deep-yin-yoga-marko-niyam-paulina/", cat: "yoga" },
+      { time: "14.00–15.30", location: "Kuhstall", title: "Klangschalen & Gong Meditation", people: "Yantra Sound Healing", url: "https://catcow.de/yantra-sound-bath-klangmeditation-sudip-cindy/", cat: "meditation" },
+      { time: "16.00–17.30", location: "Kuhstall", title: "Vinyasa Flow", people: "Tatjana Roth", url: "", cat: "yoga" },
+      { time: "18.00–20.00", location: "Kuhstall", title: "F*ck, wie komm ich in Frieden", people: "Kristin Bianchi", url: "https://catcow.de/fck-wie-komme-ich-in-den-frieden-kristin-bianchi/", cat: "workshop" },
+      { time: "21.30–23.30", location: "Kuhstall", title: "Ecstatic Kirtan", people: "Sadbhuja, Michael Stewart & Friends", url: "https://catcow.de/ecstatic-kirtan-michael-patrick-sadbhuja-friends/", cat: "kreis" },
+      { time: "08.30–10.00", location: "Cathouse", title: "Lotus Flow – Erwecke dein inneres Licht durch Yoga & Meditation", people: "Nadine Verde", url: "https://catcow.de/lotus-flow-nadine-verde/", cat: "yoga" },
+      { time: "10.45–12.45", location: "Cathouse", title: "Achtsamkeit in Beziehungen", people: "Benjamin Joon", url: "", cat: "workshop" },
+      { time: "14.00–15.30", location: "Cathouse", title: "Your Body, your Medicine Yoga (& Kakao)", people: "Claudia Heinicke", url: "https://catcow.de/medicine-yoga-kakao-claudia-heinicke/", cat: "yoga" },
+      { time: "16.00–17.30", location: "Cathouse", title: "Yoga Nidra – SaerMeditations", people: "Francisco", url: "https://catcow.de/yoga-nidra-francisco-alonso/", cat: "meditation" },
+      { time: "18.00–20.00", location: "Cathouse", title: "Frauenkreis", people: "Claudia Gärtner", url: "", cat: "kreis" },
+      { time: "21.15–00.15", location: "Cathouse", title: "Kuschelparty", people: "Elisa Meyer", url: "", cat: "workshop" },
+      { time: "08.45–10.15", location: "Om Tempel", title: "Weibliche Urkraft (für Frauen)", people: "Aline Weibig", url: "https://catcow.de/urkraft-in-bewegung-aline/", cat: "yoga" },
+      { time: "11.15–12.45", location: "Om Tempel", title: "Achtsamkeit gegen Beziehungen", people: "Benjamin Joon", url: "", cat: "workshop" },
+      { time: "14.15–15.45", location: "Om Tempel", title: "Rauch und Klang – zur Essenz deiner Träume", people: "Steffi Grub", url: "https://catcow.de/rauchklang-energetische-reise-zur-essenz-deiner-traeume-steffi/", cat: "meditation" },
+      { time: "16.30–18.00", location: "Om Tempel", title: "Dein Atem – Dein Tempel", people: "Jennya & Sisam", url: "https://catcow.de/dein-atem-dein-tempel-jennya-sisam/", cat: "meditation" },
+      { time: "18.15–19.45", location: "Om Tempel", title: "Germanenvortrag + Ritual", people: "Sphinx", url: "https://catcow.de/eine-reise-zu-den-germanischen-wurzeln-sphinx/", cat: "kreis" },
+      { time: "09.00–10.30", location: "Saustall", title: "Yoga für den Alltag", people: "Maxi Hoffmann", url: "", cat: "yoga" },
+      { time: "11.15–12.45", location: "Saustall", title: "Forrest Yoga", people: "Markus Marx", url: "https://catcow.de/forrest-yoga-hang-ab-markus-marx/", cat: "yoga" },
+      { time: "14.00–16.00", location: "Saustall", title: "(mind to heart) Hatha Yoga", people: "Sabrina", url: "https://catcow.de/flow-into-heart-yoga-sabrina/", cat: "yoga" },
+      { time: "16.30–18.30", location: "Saustall", title: "Dein Atem – Dein Tempel", people: "Jennya & Sisam", url: "https://catcow.de/dein-atem-dein-tempel-jennya-sisam/", cat: "meditation" },
+      { time: "05.00", location: "Strand", title: "Agnihotra – vedisches Feuerritual", people: "Felix & Maxi Hoffmann", url: "https://catcow.de/agnihotra-vedisches-feuerritual-maxi-felix/", cat: "kreis" },
+      { time: "10.00–12.30", location: "Strand", title: "Kakaoreise", people: "fROX & friends", url: "", cat: "kreis" },
+      { time: "14.00–16.00", location: "Strand", title: "Wild Woman Dance", people: "Lena", url: "https://catcow.de/wild-women-dance-lena/", cat: "musik" },
+      { time: "16.30–18.30", location: "Strand", title: "Trommelworkshop", people: "Georg", url: "https://catcow.de/trommelworkshop-georg/", cat: "workshop" },
+      { time: "07.30–08.30", location: "Freundeskreis", title: "Qi Gong", people: "Monique Hunger", url: "https://catcow.de/qi-gong-monique/", cat: "yoga" },
+      { time: "10.30–13.00", location: "Freundeskreis", title: "Kampfkunst / Selbstverteidigung", people: "Christian Seiffert", url: "https://catcow.de/energetic-movement-christian-seiffert/", cat: "workshop" },
+      { time: "14.00–15.30", location: "Freundeskreis", title: "Baumperlen Workshop", people: "Alexandra", url: "https://catcow.de/baumperlenworkshop-alexandra-bianca/", cat: "workshop" },
+      { time: "15.00–16.30", location: "Freundeskreis", title: "Aroha Workshop", people: "Anke Lorenz", url: "https://catcow.de/im-einklang-mit-dir-aroha-erleben-anke/", cat: "workshop" },
+      { time: "09.00–10.30", location: "Kräuterweide", title: "Auf den Spuren des Mondins", people: "", url: "", cat: "workshop" },
+      { time: "10.30–13.00", location: "Kräuterweide", title: "Handpan Workshop für Anfänger", people: "Max", url: "https://catcow.de/handpan-workshop-fuer-anfaenger-max/", cat: "workshop" },
+      { time: "14.15–16.15", location: "Kräuterweide", title: "Männerkreis Verantwortung", people: "Falk + Rico", url: "", cat: "kreis" },
+      { time: "16.00–17.00", location: "Kräuterweide", title: "Auravortrag", people: "Siri Nirmal", url: "https://catcow.de/tantra-yoga-vortrag-aura-siri-nirmal/", cat: "workshop" },
+      { time: "17.30–19.00", location: "Kräuterweide", title: "Männerkreis", people: "Torsten & Sören", url: "https://catcow.de/maennerkraftkreis-soeren-torsten/", cat: "kreis" },
+      { time: "09.00–10.00", location: "Feuerjurte", title: "Daily Sharing", people: "", url: "", cat: "kreis" },
+      { time: "11.00–13.00", location: "Feuerjurte", title: "Macht der Mondin", people: "Rebecca Stöhr", url: "https://catcow.de/mondphasen-zykluswissen-workshop-rebecca/", cat: "workshop" },
+      { time: "17.00–18.30", location: "Feuerjurte", title: "Herzöffnung für Frauen", people: "Aurora Elysion", url: "", cat: "kreis" },
+      { time: "11.00–12.15", location: "AcroYoga", title: "Qi Gong", people: "", url: "", cat: "yoga" },
+      { time: "12.30–13.45", location: "AcroYoga", title: "Introduction to Pops", people: "", url: "", cat: "yoga" },
+      { time: "14.30–15.45", location: "AcroYoga", title: "Movement Playground", people: "", url: "", cat: "yoga" },
+      { time: "16.00–17.15", location: "AcroYoga", title: "L-Basing AcroYoga Introduction", people: "", url: "", cat: "yoga" },
+      { time: "17.30–19.00", location: "AcroYoga", title: "Tanzakrobatik", people: "Sven", url: "", cat: "yoga" },
+      { time: "Täglich 12.00–15.00", location: "SUP Yoga", title: "Sup Verleih mit Einweisung (inkl. Schwimmweste für Kinder)", people: "", url: "", cat: "workshop" },
+      { time: "09.30", location: "SUP Yoga", title: "NEU: Yin-WOGA", people: "", url: "", cat: "yoga" },
+      { time: "17.00", location: "SUP Yoga", title: "WOGA SUP Yoga", people: "", url: "https://catcow.de/woga-sup-yoga-academy/", cat: "yoga" },
+      { time: "09.00–10.00", location: "Kidsspace", title: "Yoga & Spiel", people: "Robert", url: "", cat: "kids" },
+      { time: "10.00–11.00", location: "Kidsspace", title: "Outdoor Suchspiel (kleine Tasche/Eimer mitbringen)", people: "Maren", url: "", cat: "kids" },
+      { time: "10.00–11.00", location: "Kidsspace", title: "Holzbau Workshop Teil1 2h (Max. 8 Kids / ab 8 J.)", people: "Andi & Micha", url: "", cat: "kids" },
+      { time: "10.00–11.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "11.00–12.00", location: "Kidsspace", title: "Elternkreis mit Kindern – \"Austausch zu kitafrei, schulfrei, freilernen\"", people: "Isabell & Konrad", url: "", cat: "kids" },
+      { time: "11.00–12.00", location: "Kidsspace", title: "Holzbau Workshop Teil2 2h (Max. 8 Kids / ab 8 J.)", people: "Andi & Micha", url: "", cat: "kids" },
+      { time: "11.00–12.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "12.00–13.00", location: "Kidsspace", title: "Ätherische Öle im Familienalltag", people: "Sarah & Sara", url: "", cat: "kids" },
+      { time: "12.00–13.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "13.00–14.00", location: "Kidsspace", title: "Pol und Jonglage-Workshop", people: "Vlad", url: "", cat: "kids" },
+      { time: "13.00–14.00", location: "Kidsspace", title: "Rallye CAT&COW – Lern das Gelände kennen, forme & gestalte mit Knete (Max. 8 Kids)", people: "Robert & Susann", url: "", cat: "kids" },
+      { time: "13.00–14.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "14.00–15.00", location: "Kidsspace", title: "Kinderschminken & Tattoos", people: "Christian", url: "", cat: "kids" },
+      { time: "14.00–15.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "15.00–16.00", location: "Kidsspace", title: "Masken basteln", people: "Lien & Maté", url: "", cat: "kids" },
+      { time: "15.00–16.00", location: "Kidsspace", title: "Eltern-Kind Chillout-Zeit zum Spielen & Austausch", people: "", url: "", cat: "kids" },
+      { time: "16.00–17.00", location: "Kidsspace", title: "Steine & Muscheln bemalen", people: "Isabell", url: "", cat: "kids" },
+      { time: "16.00–17.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "17.00–18.00", location: "Kidsspace", title: "Riesenseifenblasen zum Selbermachen", people: "Lien", url: "", cat: "kids" },
+      { time: "17.00–18.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "18.00–19.30", location: "Kidsspace", title: "Grafiti Künste", people: "Susann", url: "", cat: "kids" },
+      { time: "18.00–19.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" }
+    ]
+  },
+  {
+    day: "Samstag",
+    date: "04.07.2026",
+    special: [{ time: "14.00–16.00", label: "FESTIVALPARADE – Treffpunkt Feuerstelle, danach Paraden Dance (Strand)" }],
+    slots: [
+      { time: "07.45–09.15", location: "Kuhstall", title: "YOGA \"Fall into P.A.R.T.S\"", people: "Susann Kind", url: "", cat: "yoga" },
+      { time: "09.45–11.15", location: "Kuhstall", title: "Sacred Union Yoga", people: "Julia & Max", url: "", cat: "yoga" },
+      { time: "11.45–13.45", location: "Kuhstall", title: "authentisches Kundalini mit Shamanic WhitSound-Gongmeditation", people: "Rüdiger HarAnand", url: "https://catcow.de/soma-tantra-kundalini-gatka-ruediger-har-anand/", cat: "yoga" },
+      { time: "16.00–17.15", location: "Kuhstall", title: "Klangtempel / Soundbath mit Gongs", people: "Christian Seiffert & Friends", url: "https://catcow.de/energetic-movement-christian-seiffert/", cat: "meditation" },
+      { time: "17.45–19.15", location: "Kuhstall", title: "Yang to Ying", people: "Nadine Verde", url: "https://catcow.de/lotus-flow-nadine-verde/", cat: "yoga" },
+      { time: "20.15–21.30", location: "Kuhstall", title: "Konzert", people: "Facesoul", url: "https://catcow.de/facesoul-konzert-faisal-salah/", cat: "musik" },
+      { time: "22.15–23.30", location: "Kuhstall", title: "Konzert", people: "Makia", url: "https://catcow.de/konzert-makia/", cat: "musik" },
+      { time: "08.15–09.45", location: "Cathouse", title: "The Power Practice – Yoga für Kraft & Klarheit", people: "Lynn Rappich", url: "https://catcow.de/the-power-practice-yoga-mit-lynn/", cat: "yoga" },
+      { time: "10.15–11.45", location: "Cathouse", title: "Moving Meditation – Vinyasa Flow", people: "Mona Becker", url: "https://catcow.de/vinyasa-flow-moving-meditation-mona/", cat: "yoga" },
+      { time: "12.15–13.45", location: "Cathouse", title: "Subtle Body Practices – Sound Scapes", people: "Benjamin & Nils und Kollektiv", url: "", cat: "meditation" },
+      { time: "16.15–17.45", location: "Cathouse", title: "Poetry of Touch", people: "Benjamin Joon", url: "", cat: "workshop" },
+      { time: "18.20–20.00", location: "Cathouse", title: "Slowsex Vortrag", people: "Leo", url: "", cat: "workshop" },
+      { time: "20.30–00.00", location: "Cathouse", title: "Tantrischer Tempelabend – Reise in die liebevolle Sinnlichkeit", people: "Cornelia & Franz", url: "https://catcow.de/tantra-temple-eine-reise-in-die-sinnlichkeit-cornelia-franz/", cat: "workshop" },
+      { time: "08.15–09.45", location: "Om Tempel", title: "Achtsamkeit gegen Angst", people: "Markus Kube", url: "", cat: "meditation" },
+      { time: "10.15–11.45", location: "Om Tempel", title: "Herzkohärenz Meditation", people: "Marion Schneider", url: "https://catcow.de/herzkohaerenz-lightcodes-marion/", cat: "meditation" },
+      { time: "12.15–13.45", location: "Om Tempel", title: "Animal Flow Workshop", people: "Benjamin Beiersdorf", url: "https://catcow.de/animal-flow-lisa-sofia/", cat: "workshop" },
+      { time: "16.00–18.00", location: "Om Tempel", title: "\"Poetry of Touch\"", people: "Benjamin Joon", url: "", cat: "workshop" },
+      { time: "08.15–09.45", location: "Saustall", title: "Yoga für Resilienz & Stressabbau", people: "Lena Klob", url: "", cat: "yoga" },
+      { time: "10.15–11.45", location: "Saustall", title: "Hormon Yoga", people: "Imke Omkari", url: "", cat: "yoga" },
+      { time: "12.15–13.45", location: "Saustall", title: "Ashtanga 2.Serie", people: "Ronald Steiner", url: "https://catcow.de/yoga-doc-ronald-steiner/", cat: "yoga" },
+      { time: "16.15–17.45", location: "Saustall", title: "Yogilates", people: "Isabell Kerl", url: "https://catcow.de/yogilates-pilates-trifft-yoga-isabel/", cat: "yoga" },
+      { time: "18.15–19.45", location: "Saustall", title: "Tantra Yoga", people: "Siri Nirmal", url: "https://catcow.de/tantra-yoga-vortrag-aura-siri-nirmal/", cat: "yoga" },
+      { time: "09.30–11.00", location: "Strand", title: "Kakaozeremonie", people: "Veda", url: "https://catcow.de/kakaozeremonie-veda-friends/", cat: "kreis" },
+      { time: "11.30–13.30", location: "Strand", title: "Singkreis", people: "Uma & Friends", url: "https://catcow.de/singing-circle-voice-activation-uma-friends/", cat: "kreis" },
+      { time: "16.30–17.45", location: "Strand", title: "Paraden DANCE", people: "Root Boys", url: "https://catcow.de/rootboys-konzert/", cat: "musik" },
+      { time: "21.00", location: "Strand", title: "Konzert", people: "Felix & Maxi Hoffmann", url: "", cat: "musik" },
+      { time: "07.30–08.30", location: "Freundeskreis", title: "Qi Gong", people: "Monique Hunger", url: "https://catcow.de/qi-gong-monique/", cat: "yoga" },
+      { time: "10.00–11.30", location: "Freundeskreis", title: "Waldbaden Workshop", people: "Anja Brodersen", url: "https://catcow.de/waldyoga-waldbaden-anja/", cat: "workshop" },
+      { time: "11.30–13.00", location: "Freundeskreis", title: "Radiästhesie-Workshop – Bau & Anwendung von Zweihandruten", people: "Marco Hellgott", url: "https://catcow.de/radiaesthesie-workshop-bau-und-anwendung-von-zweihandruten-marco/", cat: "workshop" },
+      { time: "16.30–18.00", location: "Freundeskreis", title: "Waldyoga", people: "Anja Brodersen", url: "https://catcow.de/waldyoga-waldbaden-anja/", cat: "yoga" },
+      { time: "09.15–11.00", location: "Kräuterweide", title: "Fungi Fundamentals, Heilpilze vor deiner Haustür", people: "Maximilian Stolze", url: "", cat: "workshop" },
+      { time: "11.30–13.30", location: "Kräuterweide", title: "Permakultur", people: "Humushüter", url: "https://catcow.de/permakultur-mit-dem-humushueter-willy/", cat: "workshop" },
+      { time: "16.15–18.15", location: "Kräuterweide", title: "Hands on Hearts", people: "Julia Krause Wahl", url: "https://catcow.de/hands-on-heart-julia/", cat: "workshop" },
+      { time: "09.00–10.00", location: "Feuerjurte", title: "Daily Sharing", people: "", url: "", cat: "kreis" },
+      { time: "11.00–13.00", location: "Feuerjurte", title: "Knutsch WS", people: "Dana Springborn", url: "https://catcow.de/knutschworkshop-dana/", cat: "workshop" },
+      { time: "16.00–17.30", location: "Feuerjurte", title: "Persönlichkeitsentwicklung", people: "Sadbhuja & Kore", url: "https://catcow.de/persoenlichkeitsentwicklung-sadbhuja-das/", cat: "workshop" },
+      { time: "18.30–20.00", location: "Feuerjurte", title: "Handpan WS", people: "Bert", url: "https://catcow.de/handpan-in-begegnung-die-sprache-des-klangs-bert/", cat: "workshop" },
+      { time: "11.00–12.15", location: "AcroYoga", title: "AcroYoga Introduction", people: "", url: "", cat: "yoga" },
+      { time: "12.30–13.45", location: "AcroYoga", title: "L-Basing AcroYoga Flow Level 1", people: "", url: "", cat: "yoga" },
+      { time: "16.00–17.15", location: "AcroYoga", title: "Introduction HighBird", people: "", url: "", cat: "yoga" },
+      { time: "17.30–19.00", location: "AcroYoga", title: "Open AcroJam & Skillshare", people: "", url: "", cat: "yoga" },
+      { time: "Täglich 12.00–15.00", location: "SUP Yoga", title: "Sup Verleih mit Einweisung (inkl. Schwimmweste für Kinder)", people: "", url: "", cat: "workshop" },
+      { time: "09.00", location: "SUP Yoga", title: "WOGAflow! Das neue Flow Konzept auf dem Wasser", people: "", url: "", cat: "yoga" },
+      { time: "10.30", location: "SUP Yoga", title: "Einführungskurs ins Stand Up Paddling", people: "", url: "", cat: "workshop" },
+      { time: "09.00–10.00", location: "Kidsspace", title: "Yogaspiele (ab 8 Jahre)", people: "Josi", url: "", cat: "kids" },
+      { time: "10.00–11.00", location: "Kidsspace", title: "Holzbau Workshop Teil1 2h (Max. 8 Kids / ab 8 J.)", people: "Andi & Micha", url: "", cat: "kids" },
+      { time: "10.00–11.00", location: "Kidsspace", title: "Cacao zubereiten & mit Cacao malen (Max. 10 Kids / ab 8 J.)", people: "Susann", url: "", cat: "kids" },
+      { time: "10.00–11.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "11.00–12.00", location: "Kidsspace", title: "Zaubergeschichten Meditation", people: "Jessi", url: "", cat: "kids" },
+      { time: "11.00–12.00", location: "Kidsspace", title: "Wildkräuter Tour & Butter mit Eltern 1-1,5h", people: "Anne", url: "", cat: "kids" },
+      { time: "11.00–12.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "12.00–13.00", location: "Kidsspace", title: "Windspiel basteln", people: "Anja", url: "", cat: "kids" },
+      { time: "12.00–13.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "12.30–14.00", location: "Kidsspace", title: "Selber schminken & Tattoos zur Parade (mit Music)", people: "Susann & Myana", url: "", cat: "kids" },
+      { time: "13.00–14.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "16.00–17.00", location: "Kidsspace", title: "Riesenseifenblasen zum Selbermachen", people: "Lien & Maté", url: "", cat: "kids" },
+      { time: "16.00–17.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "17.00–18.00", location: "Kidsspace", title: "Sonnenfänger basteln", people: "Josi", url: "", cat: "kids" },
+      { time: "17.00–18.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "18.00–19.00", location: "Kidsspace", title: "Singen – Tanzen (Disco)", people: "Robert & Susann", url: "", cat: "kids" },
+      { time: "18.00–19.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" }
+    ]
+  },
+  {
+    day: "Sonntag",
+    date: "05.07.2026",
+    special: [{ time: "15.00–16.00", label: "ABSCHLUSSZEREMONIE (Feuerstelle)" }],
+    slots: [
+      { time: "08.30–10.00", location: "Kuhstall", title: "Yin & Yang Yoga mit Handpan", people: "Sandy & Noah", url: "", cat: "yoga" },
+      { time: "10.30–12.30", location: "Kuhstall", title: "Shanta Vira Yoga", people: "Michael Stewart", url: "https://catcow.de/shanta-vira-yoga-michael-stewart/", cat: "yoga" },
+      { time: "13.00–14.30", location: "Kuhstall", title: "Tantra Yoga des Herzens", people: "Bernd & Alexander", url: "https://catcow.de/tantrayoga-des-herzens-alexander-bernd/", cat: "yoga" },
+      { time: "08.30–10.00", location: "Cathouse", title: "Wild Potential Yoga", people: "Susann Kind", url: "", cat: "yoga" },
+      { time: "10.30–12.30", location: "Cathouse", title: "Black Panther Energie YinYoga", people: "Luisa Henze & Liselle von Herzen", url: "https://catcow.de/evolution-dance-johanna-liselle/", cat: "yoga" },
+      { time: "13.00–15.00", location: "Cathouse", title: "GATKA – Kampfkunst der neuen Zeit? Spirit der Krieger des Lichts", people: "Rüdiger HarAnand", url: "https://catcow.de/soma-tantra-kundalini-gatka-ruediger-har-anand/", cat: "workshop" },
+      { time: "08.45–09.45", location: "Om Tempel", title: "Animal Flow", people: "Lisa Sofia Müller-Welt", url: "https://catcow.de/animal-flow-lisa-sofia/", cat: "yoga" },
+      { time: "10.30–12.00", location: "Om Tempel", title: "Soft Integration Workshop", people: "Nexi", url: "https://catcow.de/soft-integration-workshop-nexi/", cat: "workshop" },
+      { time: "13.00–14.30", location: "Om Tempel", title: "5000 Jahre Meditation", people: "Ronald Steiner", url: "https://catcow.de/yoga-doc-ronald-steiner/", cat: "meditation" },
+      { time: "08.30–10.30", location: "Saustall", title: "Rebozo Yoga", people: "Claudia Gärtner", url: "https://catcow.de/rebozo-frauenkreis-claudia/", cat: "yoga" },
+      { time: "11.00–13.00", location: "Saustall", title: "Ayuvedic Breathwork", people: "Steffi Huhn", url: "", cat: "meditation" },
+      { time: "13.30–15.00", location: "Saustall", title: "Flow Vinyasa", people: "Kira Ernst", url: "https://catcow.de/soul-flow-kira/", cat: "yoga" },
+      { time: "05.00", location: "Strand", title: "Agnihotra – vedisches Feuerritual", people: "Felix & Maxi Hoffmann", url: "https://catcow.de/agnihotra-vedisches-feuerritual-maxi-felix/", cat: "kreis" },
+      { time: "09.00–11.00", location: "Strand", title: "LachYoga", people: "Björn Alexander", url: "https://catcow.de/lachyoga-bjoern-alex/", cat: "yoga" },
+      { time: "11.30–14.30", location: "Strand", title: "Conscious Tanning", people: "Blissdorf Family", url: "", cat: "workshop" },
+      { time: "16.15–18.00", location: "Strand", title: "The Final Singing Circle Jam", people: "Sarah Creations & Friends", url: "https://catcow.de/abschluss-singkreis-sarah-creations-friends/", cat: "kreis" },
+      { time: "12.30–12.50", location: "Freundeskreis", title: "Erdfriedenmeditation", people: "Falk & Nicole", url: "https://catcow.de/erdfrieden-durch-selbstfrieden-falk-nicole/", cat: "meditation" },
+      { time: "13.00–14.30", location: "Freundeskreis", title: "Nature Singing", people: "Laura Meysel", url: "https://catcow.de/nature-singing-laura/", cat: "kreis" },
+      { time: "10.00–11.30", location: "Kräuterweide", title: "Neurografisch inspiriertes Zeichnen", people: "Uma Karuna", url: "https://catcow.de/neurografisch-inspiriertes-zeichnen-uma-karuna/", cat: "workshop" },
+      { time: "12.00–13.30", location: "Kräuterweide", title: "Grhastha Yoga – der Weg des Familienlebens", people: "Marcus Schons", url: "", cat: "yoga" },
+      { time: "09.00–10.00", location: "Feuerjurte", title: "Daily Sharing", people: "", url: "", cat: "kreis" },
+      { time: "11.00–12.30", location: "Feuerjurte", title: "Die Kunst der Berührung", people: "Feynali", url: "https://catcow.de/die-kunst-der-beruehrung-in-hingabe-lieben-feynali/", cat: "workshop" },
+      { time: "13.00–14.30", location: "Feuerjurte", title: "Melt 2Gether", people: "Christian Strangfeld", url: "", cat: "workshop" },
+      { time: "11.00–12.15", location: "AcroYoga", title: "AcroYoga Surprise Workshop", people: "", url: "", cat: "yoga" },
+      { time: "12.30–13.45", location: "AcroYoga", title: "Closing Jam", people: "", url: "", cat: "yoga" },
+      { time: "16.00", location: "SUP Yoga", title: "Sonnengruß auf dem Wasser", people: "", url: "", cat: "yoga" },
+      { time: "17.30", location: "SUP Yoga", title: "Familien WOGA – SUP Yoga für die ganze Familie ab 6 Jahre", people: "", url: "", cat: "yoga" },
+      { time: "20.00", location: "SUP Yoga", title: "WOGA Relax", people: "", url: "", cat: "meditation" },
+      { time: "09.00–10.00", location: "Kidsspace", title: "Kinderyoga Start in den Tag", people: "Josi", url: "", cat: "kids" },
+      { time: "10.00–11.00", location: "Kidsspace", title: "Mandala legen", people: "Josi", url: "", cat: "kids" },
+      { time: "10.00–11.00", location: "Kidsspace", title: "Holzbau Workshop Teil1 2h (Max. 8 Kids / ab 8 J.)", people: "Andi & Micha", url: "", cat: "kids" },
+      { time: "10.00–11.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "11.00–12.00", location: "Kidsspace", title: "Frauenkreis mit Kindern – \"Visionen von Weiblichkeit auf der Neuen Erde\"", people: "Lila Caroluna", url: "", cat: "kids" },
+      { time: "11.00–12.00", location: "Kidsspace", title: "Holzbau Workshop Teil2 2h (Max. 8 Kids / ab 8 J.)", people: "Andi & Micha", url: "", cat: "kids" },
+      { time: "11.00–12.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "12.00–13.00", location: "Kidsspace", title: "Kamishibai Geschichten", people: "Isabell", url: "", cat: "kids" },
+      { time: "12.00–13.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "13.00–14.00", location: "Kidsspace", title: "Muttergöttin Pachamama gestalten (Max. 10 Kids / ab 5 J.)", people: "Myana", url: "", cat: "kids" },
+      { time: "13.00–14.00", location: "Kidsspace", title: "Spielwiese", people: "", url: "", cat: "kids" },
+      { time: "14.00–15.00", location: "Kidsspace", title: "Eltern-Kind Chillout-Zeit zum Spielen & Austausch", people: "", url: "", cat: "kids" }
+    ]
+  }
+];
+</script>
+<script>
+(function() {
+  const dayNav = document.getElementById('dayNav');
+  const panels = document.getElementById('panels');
+  const search = document.getElementById('search');
+
+  const locOrder = ["Kuhstall","Cathouse","Om Tempel","Saustall","Strand","Freundeskreis","Kräuterweide","Feuerjurte","AcroYoga","SUP Yoga","Kidsspace"];
+
+  function slug(s) { return s.replace(/\s+/g, ''); }
+
+  function timeToMinutes(t) {
+    const m = t.match(/(\d{1,2})[.:](\d{2})/);
+    if (!m) return 9999;
+    return parseInt(m[1]) * 60 + parseInt(m[2]);
+  }
+
+  FESTIVAL_DATA.forEach((day, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'day-tab' + (i === 0 ? ' active' : '');
+    btn.dataset.idx = i;
+    btn.innerHTML = `<span class="d">${day.day}</span><span class="date">${day.date}</span>`;
+    btn.addEventListener('click', () => selectDay(i));
+    dayNav.appendChild(btn);
+  });
+
+  FESTIVAL_DATA.forEach((day, i) => {
+    const panel = document.createElement('div');
+    panel.className = 'day-panel' + (i === 0 ? ' active' : '');
+    panel.dataset.idx = i;
+
+    let specialHtml = '';
+    if (day.special && day.special.length) {
+      specialHtml = `<div class="special-banner">` + day.special.map(s =>
+        `<div class="strip"><b>${s.time}</b> ${s.label}</div>`
+      ).join('') + `</div>`;
+    }
+
+    const byLoc = {};
+    day.slots.forEach(s => {
+      if (!byLoc[s.location]) byLoc[s.location] = [];
+      byLoc[s.location].push(s);
+    });
+    Object.keys(byLoc).forEach(loc => {
+      byLoc[loc].sort((a, b) => timeToMinutes(a.time) - timeToMinutes(b.time));
+    });
+
+    const presentLocs = locOrder.filter(l => byLoc[l]);
+    Object.keys(byLoc).forEach(l => { if (!presentLocs.includes(l)) presentLocs.push(l); });
+
+    let gridHtml = '<div class="grid-wrap"><div class="grid">';
+    presentLocs.forEach(loc => {
+      gridHtml += `<div class="col loc-${slug(loc)}">`;
+      gridHtml += `<div class="col-head">${loc}</div>`;
+      byLoc[loc].forEach(s => {
+        const linked = !!s.url;
+        const tag = linked ? 'a' : 'div';
+        const hrefAttr = linked ? `href="${s.url}" target="_blank" rel="noopener"` : '';
+        const peopleHtml = s.people ? `<div class="people">${s.people}</div>` : '';
+        const catClass = 'cat-' + (s.cat || 'workshop');
+        gridHtml += `<${tag} class="card ${catClass}${linked ? ' linked' : ''}" ${hrefAttr} data-search="${(s.title + ' ' + s.people + ' ' + loc).toLowerCase()}">
+          <div class="time">${s.time}</div>
+          <div class="title">${s.title}</div>
+          ${peopleHtml}
+        </${tag}>`;
+      });
+      gridHtml += `</div>`;
+    });
+    gridHtml += '</div></div>';
+
+    panel.innerHTML = specialHtml + gridHtml;
+    panels.appendChild(panel);
+  });
+
+  function selectDay(idx) {
+    document.querySelectorAll('.day-tab').forEach(b => b.classList.toggle('active', +b.dataset.idx === idx));
+    document.querySelectorAll('.day-panel').forEach(p => p.classList.toggle('active', +p.dataset.idx === idx));
+    search.value = '';
+    filterCards('');
+  }
+
+  function filterCards(query) {
+    const q = query.trim().toLowerCase();
+    document.querySelectorAll('.card').forEach(card => {
+      if (!q) { card.classList.remove('dim'); return; }
+      const hay = card.dataset.search || '';
+      card.classList.toggle('dim', !hay.includes(q));
+    });
+  }
+
+  search.addEventListener('input', (e) => filterCards(e.target.value));
+})();
+</script>
+
+</body>
+</html>
