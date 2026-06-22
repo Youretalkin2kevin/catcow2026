@@ -70,18 +70,23 @@
   }
   .hero .sub, .hero .offline-note { display: none; }
 
-  /* ---------- Day tabs ---------- */
+  /* ---------- Day tabs + search (single row) ---------- */
   .day-nav {
     flex-shrink: 0;
     background: var(--bg-deep);
     border-bottom: 1px solid var(--line);
     padding: 7px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
   .day-nav-inner {
     display: flex;
     gap: 6px;
     overflow-x: auto;
     scrollbar-width: none;
+    flex: 1 1 auto;
+    min-width: 0;
   }
   .day-nav-inner::-webkit-scrollbar { display: none; }
   .day-tab {
@@ -106,27 +111,15 @@
   }
   .day-tab.active .date { opacity: 0.85; }
 
-  /* ---------- Controls ---------- */
-  .controls {
-    flex-shrink: 0;
-    padding: 7px 14px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 12px;
-    flex-wrap: wrap;
-    border-bottom: 1px solid var(--line);
-    background: var(--bg-deep);
-  }
-
   #search {
+    flex: 0 0 auto;
     font-size: 13px;
     padding: 6px 13px;
     border-radius: 999px;
     border: 1.5px solid var(--line);
     background: var(--paper);
     color: var(--ink);
-    min-width: 180px;
+    width: 140px;
     outline: none;
     font-family: inherit;
   }
@@ -261,6 +254,7 @@
     .hero h1 { font-size: 16px; }
     .hero .eyebrow { font-size: 9px; }
     .grid { grid-auto-columns: 132px; }
+    #search { width: 90px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -279,11 +273,8 @@
 
 <nav class="day-nav">
   <div class="day-nav-inner" id="dayNav"></div>
-</nav>
-
-<div class="controls">
   <input type="text" id="search" placeholder="Suche…">
-</div>
+</nav>
 
 <div id="panels"></div>
 
