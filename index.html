@@ -294,6 +294,111 @@
   .card.dim { opacity: 0.28; }
   .card.fav-hidden { display: none; }
 
+  /* ---------- Favorites overview modal ---------- */
+  .fav-overview {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 100;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .fav-overview.open { display: flex; }
+  .fav-overview-header {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-deep);
+  }
+  .fav-overview-header h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 18px;
+    margin: 0;
+    color: var(--ink);
+  }
+  .fav-overview-actions { display: flex; gap: 8px; }
+  .fav-overview-btn {
+    font-family: inherit;
+    font-size: 13px;
+    padding: 7px 16px;
+    border-radius: 999px;
+    border: 1.5px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .fav-overview-btn.primary {
+    background: #E0B23D;
+    border-color: #E0B23D;
+    color: #1C1B1D;
+    font-weight: 600;
+  }
+  .fav-overview-list {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 18px;
+    max-width: 640px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .fav-day-group { margin-bottom: 22px; }
+  .fav-day-group h3 {
+    font-family: "SF Mono", "Cascadia Code", Consolas, Menlo, Monaco, monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--rose);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+  }
+  .fav-row {
+    display: flex;
+    gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .fav-row .fr-time {
+    font-family: "SF Mono", "Cascadia Code", Consolas, Menlo, Monaco, monospace;
+    font-size: 12px;
+    color: var(--ink-dim);
+    flex: 0 0 78px;
+  }
+  .fav-row .fr-main { flex: 1 1 auto; }
+  .fav-row .fr-title { font-weight: 600; font-size: 14px; color: var(--ink); }
+  .fav-row .fr-meta { font-size: 12px; color: var(--ink-dim); margin-top: 2px; }
+  .fav-empty {
+    text-align: center;
+    color: var(--ink-dim);
+    padding: 60px 20px;
+    font-size: 14px;
+  }
+
+  @media print {
+    body * { visibility: hidden; }
+    .fav-overview, .fav-overview * { visibility: visible; }
+    .fav-overview {
+      position: absolute;
+      inset: 0;
+      background: white !important;
+      color: black !important;
+      display: flex !important;
+    }
+    .fav-overview-header { display: none !important; }
+    .fav-overview-list { max-width: 100%; padding: 0; }
+    .fav-day-group h3 { color: #444 !important; border-color: #ccc !important; }
+    .fav-row { border-color: #ddd !important; }
+    .fav-row .fr-time { color: #555 !important; }
+    .fav-row .fr-title { color: #000 !important; }
+    .fav-row .fr-meta { color: #555 !important; }
+  }
+
   @media (max-width: 640px) {
     .hero h1 { font-size: 16px; }
     .hero .eyebrow { font-size: 9px; }
@@ -318,10 +423,22 @@
 <nav class="day-nav">
   <div class="day-nav-inner" id="dayNav"></div>
   <button id="favFilter" class="fav-filter-btn" title="Nur Favoriten anzeigen">★</button>
+  <button id="favOverviewBtn" class="fav-filter-btn" title="Favoriten-Übersicht">☰</button>
   <input type="text" id="search" placeholder="Suche…">
 </nav>
 
 <div id="panels"></div>
+
+<div class="fav-overview" id="favOverview">
+  <div class="fav-overview-header">
+    <h2>Meine Favoriten</h2>
+    <div class="fav-overview-actions">
+      <button class="fav-overview-btn primary" id="printFavBtn">Drucken</button>
+      <button class="fav-overview-btn" id="closeFavBtn">Schließen</button>
+    </div>
+  </div>
+  <div class="fav-overview-list" id="favOverviewList"></div>
+</div>
 
 <script>
 const FESTIVAL_DATA = [
@@ -775,6 +892,75 @@ const FESTIVAL_DATA = [
     });
   }
   applyFavFilter();
+
+  // ---------- Favorites overview (cross-day, printable) ----------
+  const favOverview = document.getElementById('favOverview');
+  const favOverviewList = document.getElementById('favOverviewList');
+  const favOverviewBtn = document.getElementById('favOverviewBtn');
+  const closeFavBtn = document.getElementById('closeFavBtn');
+  const printFavBtn = document.getElementById('printFavBtn');
+
+  function collectFavoritedEvents() {
+    const result = [];
+    FESTIVAL_DATA.forEach(day => {
+      day.slots.forEach(s => {
+        const eventId = idSafe(day.day + '_' + s.location + '_' + s.time + '_' + s.title.slice(0, 30));
+        if (favorites.has(eventId)) {
+          result.push({
+            day: day.day,
+            date: day.date,
+            dayIndex: FESTIVAL_DATA.indexOf(day),
+            time: s.time,
+            minutes: timeToMinutes(s.time),
+            location: s.location,
+            title: s.title,
+            people: s.people
+          });
+        }
+      });
+    });
+    result.sort((a, b) => a.dayIndex - b.dayIndex || a.minutes - b.minutes);
+    return result;
+  }
+
+  function renderFavOverview() {
+    const events = collectFavoritedEvents();
+    if (events.length === 0) {
+      favOverviewList.innerHTML = '<div class="fav-empty">Noch keine Favoriten markiert.<br>Tippe auf den ☆ in einer Karte, um sie hier zu sammeln.</div>';
+      return;
+    }
+    let html = '';
+    let currentDay = null;
+    events.forEach(e => {
+      if (e.day !== currentDay) {
+        if (currentDay !== null) html += '</div>';
+        html += `<div class="fav-day-group"><h3>${e.day}, ${e.date}</h3>`;
+        currentDay = e.day;
+      }
+      const metaParts = [e.location];
+      if (e.people) metaParts.push(e.people);
+      html += `<div class="fav-row">
+        <div class="fr-time">${e.time}</div>
+        <div class="fr-main">
+          <div class="fr-title">${e.title}</div>
+          <div class="fr-meta">${metaParts.join(' · ')}</div>
+        </div>
+      </div>`;
+    });
+    html += '</div>';
+    favOverviewList.innerHTML = html;
+  }
+
+  favOverviewBtn.addEventListener('click', () => {
+    renderFavOverview();
+    favOverview.classList.add('open');
+  });
+  closeFavBtn.addEventListener('click', () => {
+    favOverview.classList.remove('open');
+  });
+  printFavBtn.addEventListener('click', () => {
+    window.print();
+  });
 })();
 </script>
 
