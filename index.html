@@ -111,6 +111,25 @@
   }
   .day-tab.active .date { opacity: 0.85; }
 
+  .fav-filter-btn {
+    flex: 0 0 auto;
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    border: 1.5px solid var(--line);
+    background: var(--paper);
+    color: var(--ink-dim);
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .fav-filter-btn:hover { border-color: #E0B23D; }
+  .fav-filter-btn.active {
+    background: #E0B23D;
+    border-color: #E0B23D;
+    color: #1C1B1D;
+  }
+
   #search {
     flex: 0 0 auto;
     font-size: 13px;
@@ -203,7 +222,7 @@
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 6px;
-    padding: 10px 12px;
+    padding: 10px 34px 10px 12px;
     text-decoration: none;
     color: var(--ink);
     display: block;
@@ -220,15 +239,38 @@
     border-color: var(--rose);
     box-shadow: 0 5px 14px rgba(0,0,0,0.4);
   }
-  .card.linked::after {
+  .card.linked .go-arrow {
     content: "→";
     position: absolute;
-    top: 9px;
+    bottom: 9px;
     right: 10px;
     font-size: 12px;
     color: var(--rose);
     opacity: 0.8;
   }
+  .card.favorited {
+    border-color: #E0B23D;
+    background: #2A2620;
+  }
+  .fav-btn {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 26px;
+    height: 26px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 26px;
+    text-align: center;
+    color: var(--ink-dim);
+    opacity: 0.5;
+    z-index: 2;
+    transition: opacity 0.15s ease, color 0.15s ease, transform 0.1s ease;
+  }
+  .fav-btn:hover { opacity: 0.9; transform: scale(1.12); }
+  .fav-btn.active { color: #E0B23D; opacity: 1; }
   .card .time {
     font-family: "SF Mono", "Cascadia Code", Consolas, Menlo, Monaco, monospace;
     font-size: 10.5px;
@@ -242,6 +284,7 @@
     font-size: 13px;
     line-height: 1.28;
     margin-bottom: 2px;
+    padding-right: 4px;
   }
   .card .people {
     font-size: 11.5px;
@@ -249,6 +292,7 @@
     font-style: italic;
   }
   .card.dim { opacity: 0.28; }
+  .card.fav-hidden { display: none; }
 
   @media (max-width: 640px) {
     .hero h1 { font-size: 16px; }
@@ -273,6 +317,7 @@
 
 <nav class="day-nav">
   <div class="day-nav-inner" id="dayNav"></div>
+  <button id="favFilter" class="fav-filter-btn" title="Nur Favoriten anzeigen">★</button>
   <input type="text" id="search" placeholder="Suche…">
 </nav>
 
@@ -584,10 +629,24 @@ const FESTIVAL_DATA = [
   const dayNav = document.getElementById('dayNav');
   const panels = document.getElementById('panels');
   const search = document.getElementById('search');
+  const favorites = loadFavoritesEarly();
 
   const locOrder = ["Kuhstall","Cathouse","Om Tempel","Saustall","Strand","Freundeskreis","Kräuterweide","Feuerjurte","AcroYoga","SUP Yoga","Kidsspace"];
 
   function slug(s) { return s.replace(/\s+/g, ''); }
+
+  function idSafe(s) {
+    return s.replace(/[^a-zA-Z0-9äöüÄÖÜß]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+  }
+
+  function loadFavoritesEarly() {
+    try {
+      const raw = localStorage.getItem('catcow2026_favorites');
+      return raw ? new Set(JSON.parse(raw)) : new Set();
+    } catch (e) {
+      return new Set();
+    }
+  }
 
   function timeToMinutes(t) {
     const m = t.match(/(\d{1,2})[.:](\d{2})/);
@@ -637,10 +696,15 @@ const FESTIVAL_DATA = [
         const tag = linked ? 'a' : 'div';
         const hrefAttr = linked ? `href="${s.url}" target="_blank" rel="noopener"` : '';
         const peopleHtml = s.people ? `<div class="people">${s.people}</div>` : '';
-        gridHtml += `<${tag} class="card${linked ? ' linked' : ''}" ${hrefAttr} data-search="${(s.title + ' ' + s.people + ' ' + loc).toLowerCase()}">
+        const eventId = idSafe(day.day + '_' + loc + '_' + s.time + '_' + s.title.slice(0, 30));
+        const isFav = favorites.has(eventId);
+        const arrowHtml = linked ? '<span class="go-arrow">→</span>' : '';
+        gridHtml += `<${tag} class="card${linked ? ' linked' : ''}${isFav ? ' favorited' : ''}" ${hrefAttr} data-search="${(s.title + ' ' + s.people + ' ' + loc).toLowerCase()}" data-event-id="${eventId}">
+          <button class="fav-btn${isFav ? ' active' : ''}" data-event-id="${eventId}" aria-label="Favorit" onclick="event.preventDefault(); event.stopPropagation(); toggleFavorite('${eventId}', this);">${isFav ? '★' : '☆'}</button>
           <div class="time">${s.time}</div>
           <div class="title">${s.title}</div>
           ${peopleHtml}
+          ${arrowHtml}
         </${tag}>`;
       });
       gridHtml += `</div>`;
@@ -656,6 +720,7 @@ const FESTIVAL_DATA = [
     document.querySelectorAll('.day-panel').forEach(p => p.classList.toggle('active', +p.dataset.idx === idx));
     search.value = '';
     filterCards('');
+    applyFavFilter();
   }
 
   function filterCards(query) {
@@ -668,6 +733,48 @@ const FESTIVAL_DATA = [
   }
 
   search.addEventListener('input', (e) => filterCards(e.target.value));
+
+  // ---------- Favorites (LocalStorage) ----------
+  window.toggleFavorite = function(eventId, btnEl) {
+    if (favorites.has(eventId)) {
+      favorites.delete(eventId);
+    } else {
+      favorites.add(eventId);
+    }
+    saveFavorites();
+    document.querySelectorAll(`[data-event-id="${eventId}"]`).forEach(el => {
+      if (el.classList.contains('fav-btn')) {
+        el.classList.toggle('active', favorites.has(eventId));
+        el.textContent = favorites.has(eventId) ? '★' : '☆';
+      }
+      if (el.classList.contains('card')) {
+        el.classList.toggle('favorited', favorites.has(eventId));
+      }
+    });
+    applyFavFilter();
+  };
+
+  function saveFavorites() {
+    try {
+      localStorage.setItem('catcow2026_favorites', JSON.stringify([...favorites]));
+    } catch (e) { /* localStorage unavailable, ignore */ }
+  }
+
+  let favOnly = false;
+  const favFilterBtn = document.getElementById('favFilter');
+  favFilterBtn.addEventListener('click', () => {
+    favOnly = !favOnly;
+    favFilterBtn.classList.toggle('active', favOnly);
+    applyFavFilter();
+  });
+
+  function applyFavFilter() {
+    document.querySelectorAll('.day-panel.active .card').forEach(card => {
+      const id = card.dataset.eventId;
+      card.classList.toggle('fav-hidden', favOnly && !favorites.has(id));
+    });
+  }
+  applyFavFilter();
 })();
 </script>
 
