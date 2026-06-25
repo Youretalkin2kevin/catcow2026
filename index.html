@@ -381,19 +381,40 @@
   }
 
   @media print {
+    html, body {
+      height: auto !important;
+      overflow: visible !important;
+      background: white !important;
+    }
     body * { visibility: hidden; }
     .fav-overview, .fav-overview * { visibility: visible; }
     .fav-overview {
-      position: absolute;
-      inset: 0;
+      position: static !important;
+      display: block !important;
+      height: auto !important;
+      overflow: visible !important;
       background: white !important;
       color: black !important;
-      display: flex !important;
     }
     .fav-overview-header { display: none !important; }
-    .fav-overview-list { max-width: 100%; padding: 0; }
+    .fav-overview-list {
+      position: static !important;
+      max-width: 100%;
+      max-height: none !important;
+      overflow: visible !important;
+      padding: 0;
+      margin: 0;
+    }
+    .fav-day-group {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
     .fav-day-group h3 { color: #444 !important; border-color: #ccc !important; }
-    .fav-row { border-color: #ddd !important; }
+    .fav-row {
+      border-color: #ddd !important;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
     .fav-row .fr-time { color: #555 !important; }
     .fav-row .fr-title { color: #000 !important; }
     .fav-row .fr-meta { color: #555 !important; }
@@ -586,6 +607,7 @@ const FESTIVAL_DATA = [
       { time: "11.15–12.45", location: "Saustall", title: "Forrest Yoga", people: "Markus Marx", url: "https://catcow.de/forrest-yoga-hang-ab-markus-marx/", cat: "yoga" },
       { time: "14.15–15.45", location: "Saustall", title: "(mind to heart) Hatha Yoga", people: "Sabrina", url: "https://catcow.de/flow-into-heart-yoga-sabrina/", cat: "yoga" },
       { time: "16.15–17.45", location: "Saustall", title: "Dein Atem – Dein Tempel", people: "Jennya & Sisam", url: "https://catcow.de/dein-atem-dein-tempel-jennya-sisam/", cat: "workshop" },
+      { time: "18.15–19.15", location: "Saustall", title: "Singing Circle", people: "Sarah Creations & Friends", url: "", cat: "kreis" },
       { time: "05.00", location: "Strand", title: "Agnihotra – vedisches Feuerritual", people: "Felix & Maxi Hoffmann", url: "https://catcow.de/agnihotra-vedisches-feuerritual-maxi-felix/", cat: "kreis" },
       { time: "10.00–12.30", location: "Strand", title: "Kakaoreise", people: "Moppel & Mareike", url: "", cat: "kreis" },
       { time: "14.00–16.00", location: "Strand", title: "Wild Woman Dance", people: "Lena", url: "https://catcow.de/wild-women-dance-lena/", cat: "workshop" },
