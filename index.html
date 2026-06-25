@@ -92,8 +92,10 @@
   .day-tab {
     flex: 0 0 auto;
     font-family: "SF Mono", "Cascadia Code", Consolas, Menlo, Monaco, monospace;
-    font-size: 11px;
-    padding: 6px 13px;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 9px 15px;
+    min-width: 42px;
     border-radius: 999px;
     border: 1.5px solid var(--line);
     background: transparent;
@@ -101,49 +103,35 @@
     cursor: pointer;
     transition: all 0.15s ease;
     white-space: nowrap;
+    text-align: center;
   }
-  .day-tab .d { display: block; font-weight: 700; font-size: 12px; }
-  .day-tab .date { display: block; opacity: 0.55; font-size: 8.5px; margin-top: 1px; }
   .day-tab.active {
     background: var(--rose);
     border-color: var(--rose);
     color: white;
   }
-  .day-tab.active .date { opacity: 0.85; }
 
-  .fav-filter-btn {
+  .fav-overview-trigger {
     flex: 0 0 auto;
-    width: 32px;
-    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 9px 15px;
     border-radius: 999px;
-    border: 1.5px solid var(--line);
-    background: var(--paper);
-    color: var(--ink-dim);
-    font-size: 15px;
+    border: 1.5px solid #E0B23D;
+    background: transparent;
+    color: #E0B23D;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
     cursor: pointer;
     transition: all 0.15s ease;
   }
-  .fav-filter-btn:hover { border-color: #E0B23D; }
-  .fav-filter-btn.active {
+  .fav-overview-trigger:hover {
     background: #E0B23D;
-    border-color: #E0B23D;
-    color: #1C1B1D;
+    color: #000000;
   }
-
-  #search {
-    flex: 0 0 auto;
-    font-size: 13px;
-    padding: 6px 13px;
-    border-radius: 999px;
-    border: 1.5px solid var(--line);
-    background: var(--paper);
-    color: var(--ink);
-    width: 140px;
-    outline: none;
-    font-family: inherit;
-  }
-  #search:focus { border-color: var(--rose); }
-  #search::placeholder { color: var(--ink-dim); }
 
   /* ---------- Special banner ---------- */
   .special-banner { padding: 8px 14px 0; flex-shrink: 0; }
@@ -240,13 +228,16 @@
     box-shadow: 0 5px 14px rgba(0,0,0,0.4);
   }
   .card.linked .go-arrow {
-    content: "→";
     position: absolute;
     bottom: 9px;
-    right: 10px;
-    font-size: 12px;
+    right: 9px;
+    font-size: 14px;
+    font-weight: 900;
     color: var(--rose);
-    opacity: 0.8;
+    opacity: 0.9;
+  }
+  .card.linked:hover .go-arrow {
+    opacity: 1;
   }
   .card.favorited {
     border-color: #E0B23D;
@@ -291,8 +282,6 @@
     color: var(--ink-dim);
     font-style: italic;
   }
-  .card.dim { opacity: 0.28; }
-  .card.fav-hidden { display: none; }
 
   /* ---------- Favorites overview modal ---------- */
   .fav-overview {
@@ -335,7 +324,7 @@
   .fav-overview-btn.primary {
     background: #E0B23D;
     border-color: #E0B23D;
-    color: #1C1B1D;
+    color: #000000;
     font-weight: 600;
   }
   .fav-overview-list {
@@ -400,10 +389,25 @@
   }
 
   @media (max-width: 640px) {
-    .hero h1 { font-size: 16px; }
+    .hero { padding: 10px 14px; }
+    .hero h1 { font-size: 17px; }
     .hero .eyebrow { font-size: 9px; }
-    .grid { grid-auto-columns: 132px; }
-    #search { width: 90px; }
+    .day-nav { padding: 8px 10px; gap: 8px; }
+    .day-tab { font-size: 13px; padding: 9px 13px; min-width: 38px; }
+    .fav-overview-trigger { padding: 9px 13px; font-size: 12.5px; }
+    .grid { grid-auto-columns: 158px; gap: 7px; }
+    .grid-wrap { padding: 8px 10px 10px; }
+    .col-head { font-size: 12px; padding: 8px 10px; }
+    .card { padding: 11px 32px 11px 11px; }
+    .card .title { font-size: 13.5px; }
+    .card .time { font-size: 11px; }
+    .card .people { font-size: 11px; }
+    .fav-btn { width: 30px; height: 30px; font-size: 17px; line-height: 30px; }
+    .fav-overview-header { padding: 12px 14px; flex-wrap: wrap; gap: 8px; }
+    .fav-overview-header h2 { font-size: 16px; }
+    .fav-overview-btn { padding: 9px 14px; font-size: 13px; }
+    .fav-row .fr-time { flex: 0 0 64px; font-size: 11px; }
+    .fav-row .fr-title { font-size: 13.5px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -422,9 +426,7 @@
 
 <nav class="day-nav">
   <div class="day-nav-inner" id="dayNav"></div>
-  <button id="favFilter" class="fav-filter-btn" title="Nur Favoriten anzeigen">★</button>
-  <button id="favOverviewBtn" class="fav-filter-btn" title="Favoriten-Übersicht">☰</button>
-  <input type="text" id="search" placeholder="Suche…">
+  <button id="favOverviewBtn" class="fav-overview-trigger" title="Favoriten als druckfreundliche Liste">★ Liste</button>
 </nav>
 
 <div id="panels"></div>
@@ -745,7 +747,6 @@ const FESTIVAL_DATA = [
 (function() {
   const dayNav = document.getElementById('dayNav');
   const panels = document.getElementById('panels');
-  const search = document.getElementById('search');
   const favorites = loadFavoritesEarly();
 
   const locOrder = ["Kuhstall","Cathouse","Om Tempel","Saustall","Strand","Freundeskreis","Kräuterweide","Feuerjurte","AcroYoga","SUP Yoga","Kidsspace"];
@@ -771,11 +772,13 @@ const FESTIVAL_DATA = [
     return parseInt(m[1]) * 60 + parseInt(m[2]);
   }
 
+  const dayAbbrev = { "Mittwoch": "Mi", "Donnerstag": "Do", "Freitag": "Fr", "Samstag": "Sa", "Sonntag": "So" };
+
   FESTIVAL_DATA.forEach((day, i) => {
     const btn = document.createElement('button');
     btn.className = 'day-tab' + (i === 0 ? ' active' : '');
     btn.dataset.idx = i;
-    btn.innerHTML = `<span class="d">${day.day}</span><span class="date">${day.date}</span>`;
+    btn.innerHTML = `<span class="d">${dayAbbrev[day.day] || day.day}</span>`;
     btn.addEventListener('click', () => selectDay(i));
     dayNav.appendChild(btn);
   });
@@ -816,7 +819,7 @@ const FESTIVAL_DATA = [
         const eventId = idSafe(day.day + '_' + loc + '_' + s.time + '_' + s.title.slice(0, 30));
         const isFav = favorites.has(eventId);
         const arrowHtml = linked ? '<span class="go-arrow">→</span>' : '';
-        gridHtml += `<${tag} class="card${linked ? ' linked' : ''}${isFav ? ' favorited' : ''}" ${hrefAttr} data-search="${(s.title + ' ' + s.people + ' ' + loc).toLowerCase()}" data-event-id="${eventId}">
+        gridHtml += `<${tag} class="card${linked ? ' linked' : ''}${isFav ? ' favorited' : ''}" ${hrefAttr} data-event-id="${eventId}">
           <button class="fav-btn${isFav ? ' active' : ''}" data-event-id="${eventId}" aria-label="Favorit" onclick="event.preventDefault(); event.stopPropagation(); toggleFavorite('${eventId}', this);">${isFav ? '★' : '☆'}</button>
           <div class="time">${s.time}</div>
           <div class="title">${s.title}</div>
@@ -835,21 +838,7 @@ const FESTIVAL_DATA = [
   function selectDay(idx) {
     document.querySelectorAll('.day-tab').forEach(b => b.classList.toggle('active', +b.dataset.idx === idx));
     document.querySelectorAll('.day-panel').forEach(p => p.classList.toggle('active', +p.dataset.idx === idx));
-    search.value = '';
-    filterCards('');
-    applyFavFilter();
   }
-
-  function filterCards(query) {
-    const q = query.trim().toLowerCase();
-    document.querySelectorAll('.card').forEach(card => {
-      if (!q) { card.classList.remove('dim'); return; }
-      const hay = card.dataset.search || '';
-      card.classList.toggle('dim', !hay.includes(q));
-    });
-  }
-
-  search.addEventListener('input', (e) => filterCards(e.target.value));
 
   // ---------- Favorites (LocalStorage) ----------
   window.toggleFavorite = function(eventId, btnEl) {
@@ -868,7 +857,6 @@ const FESTIVAL_DATA = [
         el.classList.toggle('favorited', favorites.has(eventId));
       }
     });
-    applyFavFilter();
   };
 
   function saveFavorites() {
@@ -876,22 +864,6 @@ const FESTIVAL_DATA = [
       localStorage.setItem('catcow2026_favorites', JSON.stringify([...favorites]));
     } catch (e) { /* localStorage unavailable, ignore */ }
   }
-
-  let favOnly = false;
-  const favFilterBtn = document.getElementById('favFilter');
-  favFilterBtn.addEventListener('click', () => {
-    favOnly = !favOnly;
-    favFilterBtn.classList.toggle('active', favOnly);
-    applyFavFilter();
-  });
-
-  function applyFavFilter() {
-    document.querySelectorAll('.day-panel.active .card').forEach(card => {
-      const id = card.dataset.eventId;
-      card.classList.toggle('fav-hidden', favOnly && !favorites.has(id));
-    });
-  }
-  applyFavFilter();
 
   // ---------- Favorites overview (cross-day, printable) ----------
   const favOverview = document.getElementById('favOverview');
