@@ -385,8 +385,13 @@
       height: auto !important;
       overflow: visible !important;
       background: white !important;
+      display: block !important;
     }
-    body * { visibility: hidden; }
+    body > .hero,
+    body > .day-nav,
+    body > #panels {
+      display: none !important;
+    }
     .fav-overview, .fav-overview * { visibility: visible; }
     .fav-overview {
       position: static !important;
