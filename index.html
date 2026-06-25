@@ -321,7 +321,7 @@
     margin: 0;
     color: var(--ink);
   }
-  .fav-overview-actions { display: flex; gap: 8px; }
+  .fav-overview-actions { display: flex; gap: 8px; flex-wrap: wrap; }
   .fav-overview-btn {
     font-family: inherit;
     font-size: 13px;
@@ -338,6 +338,62 @@
     color: #000000;
     font-weight: 600;
   }
+
+  .fav-import-row {
+    display: none;
+    gap: 8px;
+    padding: 10px 18px;
+    max-width: 640px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: 1px solid var(--line);
+    flex-shrink: 0;
+  }
+  .fav-import-row.open { display: flex; }
+  #favImportInput {
+    flex: 1 1 auto;
+    font-size: 13px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1.5px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    outline: none;
+    font-family: inherit;
+    min-width: 0;
+  }
+  #favImportInput:focus { border-color: var(--rose); }
+
+  .fav-export-row {
+    display: none;
+    padding: 10px 18px;
+    max-width: 640px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: 1px solid var(--line);
+    flex-shrink: 0;
+  }
+  .fav-export-row.open { display: block; }
+  .fav-export-row textarea {
+    width: 100%;
+    font-family: "SF Mono", "Cascadia Code", Consolas, Menlo, Monaco, monospace;
+    font-size: 11px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1.5px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    resize: none;
+    box-sizing: border-box;
+  }
+  .fav-export-row .hint {
+    font-size: 11px;
+    color: var(--ink-dim);
+    margin-top: 6px;
+  }
+
   .fav-overview-list {
     flex: 1 1 auto;
     overflow-y: auto;
@@ -473,10 +529,17 @@
   <div class="fav-overview-header">
     <h2>Meine Favoriten</h2>
     <div class="fav-overview-actions">
+      <button class="fav-overview-btn" id="exportFavBtn">Favoriten exportieren</button>
+      <button class="fav-overview-btn" id="importFavBtn">Favoriten importieren</button>
       <button class="fav-overview-btn primary" id="printFavBtn">Drucken</button>
       <button class="fav-overview-btn" id="closeFavBtn">Schließen</button>
     </div>
   </div>
+  <div class="fav-import-row" id="favImportRow">
+    <input type="text" id="favImportInput" placeholder="Code hier einfügen…">
+    <button class="fav-overview-btn primary" id="confirmImportBtn">Übernehmen</button>
+  </div>
+  <div class="fav-export-row" id="favExportRow"></div>
   <div class="fav-overview-list" id="favOverviewList"></div>
 </div>
 
@@ -965,12 +1028,90 @@ const FESTIVAL_DATA = [
   favOverviewBtn.addEventListener('click', () => {
     renderFavOverview();
     favOverview.classList.add('open');
+    document.getElementById('favImportRow').classList.remove('open');
+    document.getElementById('favExportRow').classList.remove('open');
   });
   closeFavBtn.addEventListener('click', () => {
     favOverview.classList.remove('open');
   });
   printFavBtn.addEventListener('click', () => {
     window.print();
+  });
+
+  // ---------- Export / Import favorites between devices ----------
+  const exportFavBtn = document.getElementById('exportFavBtn');
+  const importFavBtn = document.getElementById('importFavBtn');
+  const favImportRow = document.getElementById('favImportRow');
+  const favExportRow = document.getElementById('favExportRow');
+  const favImportInput = document.getElementById('favImportInput');
+  const confirmImportBtn = document.getElementById('confirmImportBtn');
+
+  function encodeFavorites() {
+    const json = JSON.stringify([...favorites]);
+    return btoa(encodeURIComponent(json));
+  }
+
+  function decodeFavorites(code) {
+    const json = decodeURIComponent(atob(code.trim()));
+    const arr = JSON.parse(json);
+    if (!Array.isArray(arr)) throw new Error('invalid');
+    return arr;
+  }
+
+  exportFavBtn.addEventListener('click', () => {
+    favImportRow.classList.remove('open');
+    const isOpen = favExportRow.classList.contains('open');
+    if (isOpen) {
+      favExportRow.classList.remove('open');
+      return;
+    }
+    if (favorites.size === 0) {
+      favExportRow.innerHTML = '<div class="hint">Noch keine Favoriten zum Exportieren markiert.</div>';
+    } else {
+      const code = encodeFavorites();
+      favExportRow.innerHTML = `
+        <textarea id="favExportText" rows="3" readonly></textarea>
+        <div class="hint">Code kopieren und z.B. per Nachricht aufs andere Gerät schicken. Dort über "Favoriten importieren" wieder einspielen.</div>
+      `;
+      const ta = document.getElementById('favExportText');
+      ta.value = code;
+      ta.focus();
+      ta.select();
+      try { document.execCommand('copy'); } catch (e) { /* clipboard copy best-effort */ }
+    }
+    favExportRow.classList.add('open');
+  });
+
+  importFavBtn.addEventListener('click', () => {
+    favExportRow.classList.remove('open');
+    favImportRow.classList.toggle('open');
+    if (favImportRow.classList.contains('open')) {
+      favImportInput.value = '';
+      favImportInput.focus();
+    }
+  });
+
+  confirmImportBtn.addEventListener('click', () => {
+    const code = favImportInput.value;
+    if (!code.trim()) return;
+    try {
+      const ids = decodeFavorites(code);
+      ids.forEach(id => favorites.add(id));
+      saveFavorites();
+      document.querySelectorAll('.fav-btn').forEach(btn => {
+        const id = btn.dataset.eventId;
+        const isFav = favorites.has(id);
+        btn.classList.toggle('active', isFav);
+        btn.textContent = isFav ? '★' : '☆';
+        const card = btn.closest('.card');
+        if (card) card.classList.toggle('favorited', isFav);
+      });
+      favImportRow.classList.remove('open');
+      renderFavOverview();
+    } catch (e) {
+      favImportInput.style.borderColor = 'var(--rose)';
+      favImportInput.placeholder = 'Ungültiger Code – bitte prüfen';
+    }
   });
 })();
 </script>
