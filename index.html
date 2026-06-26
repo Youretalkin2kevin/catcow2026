@@ -990,7 +990,8 @@ const FESTIVAL_DATA = [
             location: s.location,
             title: s.title,
             people: s.people,
-            description: s.description || ''
+            description: s.description || '',
+            url: s.url || ''
           });
         }
       });
@@ -1169,6 +1170,7 @@ const FESTIVAL_DATA = [
       let descParts = [];
       if (e.people) descParts.push(e.people);
       if (e.description) descParts.push(e.description);
+      if (e.url) descParts.push(e.url);
       const description = escapeICSText(descParts.join('\n\n'));
       lines.push(
         'BEGIN:VEVENT',
@@ -1178,9 +1180,10 @@ const FESTIVAL_DATA = [
         `DTEND;TZID=Europe/Berlin:${dtEnd}`,
         `SUMMARY:${summary}`,
         `LOCATION:${location}`,
-        `DESCRIPTION:${description}`,
-        'END:VEVENT'
+        `DESCRIPTION:${description}`
       );
+      if (e.url) lines.push(`URL:${e.url}`);
+      lines.push('END:VEVENT');
       count++;
     });
     lines.push('END:VCALENDAR');
