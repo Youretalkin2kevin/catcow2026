@@ -529,8 +529,9 @@
   <div class="fav-overview-header">
     <h2>Meine Favoriten</h2>
     <div class="fav-overview-actions">
-      <button class="fav-overview-btn" id="exportFavBtn">Favoriten exportieren</button>
-      <button class="fav-overview-btn" id="importFavBtn">Favoriten importieren</button>
+      <button class="fav-overview-btn" id="calendarFavBtn">Favoriten als .ics exportieren</button>
+      <button class="fav-overview-btn" id="exportFavBtn">Favoriten auf anderen Browser exportieren</button>
+      <button class="fav-overview-btn" id="importFavBtn">Favoriten in anderen Browser importieren</button>
       <button class="fav-overview-btn primary" id="printFavBtn">Drucken</button>
       <button class="fav-overview-btn" id="closeFavBtn">Schließen</button>
     </div>
@@ -548,16 +549,16 @@ const FESTIVAL_DATA = [
 {
     day: "Mittwoch",
     date: "01.07.2026",
-    special: [{ time: "16.00–17.00", label: "ERÖFFNUNGSZEREMONIE (Freundeskreis)" }],
+    special: [{"time":"16.00–17.00","label":"ERÖFFNUNGSZEREMONIE (Freundeskreis)"}],
     slots: [
-      { time: "17.15–18.45", location: "Kuhstall", title: "OmLoveYoga – Himalayan Kriya Yoga & Sound Journey", people: "Befreie deine Lebensfreude", url: "https://catcow.de/himalayan-kriya-yoga-sound-journey-charlotte-ivano/", cat: "yoga" },
-      { time: "19.30–20.50", location: "Kuhstall", title: "Konzert", people: "Mantra Kollektiv", url: "https://catcow.de/mantrakollektiv/", cat: "musik" },
-      { time: "21.40–23.00", location: "Kuhstall", title: "Konzert", people: "Natan Rabin & Cale", url: "https://catcow.de/ceremonial-concert-natan-rabin-cale-alit/", cat: "musik" },
-      { time: "17.30–19.00", location: "Cathouse", title: "Conscious Chakra Flow", people: "Mari, Uwe & Valentin", url: "https://catcow.de/conscious-chakra-flow-mari-valentin-uwe/", cat: "yoga" },
-      { time: "20.30–23.30", location: "Cathouse", title: "Conscious Cuddle Experience - KuschelReise mit Nicole", people: "", url: "https://catcow.de/consciouscuddleexperience-kuschelreise-nicole/", cat: "workshop" },
-      { time: "17.30–19.00", location: "Om Tempel", title: "Theater, das verbindet", people: "Jenny Thamm", url: "https://catcow.de/theater-das-verbindet-jenni/", cat: "workshop" },
-      { time: "17.15–18.45", location: "Saustall", title: "PlayFightGround", people: "Maria Paula", url: "https://catcow.de/playfightground-maria-paula/", cat: "workshop" },
-      { time: "17.30–19.00", location: "Kräuterweide", title: "Voice Expedition Workshop", people: "Elayn", url: "https://catcow.de/voice-expedition-elayn/", cat: "workshop" },
+      { time: "17.15–18.45", location: "Kuhstall", title: "OmLoveYoga – Himalayan Kriya Yoga & Sound Journey", people: "Befreie deine Lebensfreude", url: "https://catcow.de/himalayan-kriya-yoga-sound-journey-charlotte-ivano/", cat: "yoga", description: "Himalayan Kriya Yoga & Sound Journey Befreie deine Lebensfreude 🔥Himalayan Kriya Yoga & Sound Journey – Charlotte & Ivano\nDirekt zum Auftakt: eine Session, die dich ankommen lässt. Wir starten gemeinsam mit Feuer, Bewegung und Klang." },
+      { time: "19.30–20.50", location: "Kuhstall", title: "Konzert", people: "Mantra Kollektiv", url: "https://catcow.de/mantrakollektiv/", cat: "musik", description: "Das Mantrakollektiv aus Leipzig lädt seit fast drei Jahren zu Singkreisen ein, um gemeinsam kraftvolle Mantras, Rainbowsongs und herzeröffnende Lieder zu singen." },
+      { time: "21.40–23.00", location: "Kuhstall", title: "Konzert", people: "Natan Rabin & Cale", url: "https://catcow.de/ceremonial-concert-natan-rabin-cale-alit/", cat: "musik", description: "Natan Rabin und Cale Alit erschaffen mit Instrumenten wie Oud und Santoor einen zeremoniellen Klangraum, der alte Medizinlieder mit moderner Inspiration verbindet und dich tief zu dir selbst führt." },
+      { time: "17.30–19.00", location: "Cathouse", title: "Conscious Chakra Flow", people: "Mari, Uwe & Valentin", url: "https://catcow.de/conscious-chakra-flow-mari-valentin-uwe/", cat: "yoga", description: "In diesem Workshop verbinden sich Asanas, Atemarbeit, gezielter Chakra-Fokus und die harmonischen Schwingungen von Klangschalen zu einer tiefgehenden Energie- und Bewusstseinsarbeit." },
+      { time: "20.30–23.30", location: "Cathouse", title: "Conscious Cuddle Experience - KuschelReise mit Nicole", people: "", url: "https://catcow.de/consciouscuddleexperience-kuschelreise-nicole/", cat: "workshop", description: "Ankommen, anvertrauen, dazu gehören …\nAuf der KuschelReise, gleich zu Beginn des Festivals, findet die Herde\nzusammen." },
+      { time: "17.30–19.00", location: "Om Tempel", title: "Theater, das verbindet", people: "Jenny Thamm", url: "https://catcow.de/theater-das-verbindet-jenni/", cat: "workshop", description: "In meinem Workshop öffnet sich ein Raum, in dem Theater zur Entdeckungsreise wird: Hier können die Teilnehmer*innen spielerisch ausprobieren, wer sie sind, wie sie auf andere wirken und welchen Bezug sie zur Welt haben." },
+      { time: "17.15–18.45", location: "Saustall", title: "PlayFightGround", people: "Maria Paula", url: "https://catcow.de/playfightground-maria-paula/", cat: "workshop", description: "Play – Spielen Spielerische Bewegung und Tanz öffnen den Raum für Leichtigkeit, Neugier und Kontakt. Fight – Raufen Beim achtsamen Raufen können Kraft, Grenzen und lebendige Interaktion erforscht werden." },
+      { time: "17.30–19.00", location: "Kräuterweide", title: "Voice Expedition Workshop", people: "Elayn", url: "https://catcow.de/voice-expedition-elayn/", cat: "workshop", description: "Voice Expedition Workshop\n– Eine Forschungsreise zu dir und deiner StimmeVoice Expedition – Elayn\nKomm mit auf eine spielerische Expedition zu deiner Stimme. Entdecke dein inneres Orchester\nund bring deine Klangfarben zum Klingen." },
       { time: "Täglich 12.00–15.00", location: "SUP Yoga", title: "Sup Verleih mit Einweisung (inkl. Schwimmweste für Kinder)", people: "", url: "", cat: "workshop" },
       { time: "19.30", location: "SUP Yoga", title: "Einführung ins Stand Up Paddling", people: "", url: "", cat: "workshop" },
       { time: "20.30", location: "SUP Yoga", title: "Sunset WOGA mit Klangschale & Live Gesang", people: "", url: "", cat: "musik" },
@@ -573,50 +574,50 @@ const FESTIVAL_DATA = [
     day: "Donnerstag",
     date: "02.07.2026",
     slots: [
-      { time: "08.30–10.00", location: "Kuhstall", title: "Ashtanga Yoga – The old school orginal", people: "Ronald Steiner", url: "https://catcow.de/yoga-doc-ronald-steiner/", cat: "yoga" },
-      { time: "10.30–12.00", location: "Kuhstall", title: "workBREATHout", people: "Andreas Koschwitz", url: "https://catcow.de/power-hatha-yoga-workbreathout-andreas/", cat: "workshop" },
-      { time: "12.45–14.15", location: "Kuhstall", title: "Embody the light Yoga", people: "Ulrike Manhart", url: "https://catcow.de/embody-the-light-yoga-ulrike/", cat: "yoga" },
+      { time: "08.30–10.00", location: "Kuhstall", title: "Ashtanga Yoga – The old school orginal", people: "Ronald Steiner", url: "https://catcow.de/yoga-doc-ronald-steiner/", cat: "yoga", description: "Der „Yoga Doc“ Dr. Ronald Steiner ist Begründer der AYI Methode. Sie verbindet traditionellen Ashtanga Yoga mit innovativer Yogatherapie und lebendiger Philosophie – für eine sehr persönliche Praxis von sportlich-akrobatisch bis meditativ-therapeutisch." },
+      { time: "10.30–12.00", location: "Kuhstall", title: "workBREATHout", people: "Andreas Koschwitz", url: "https://catcow.de/power-hatha-yoga-workbreathout-andreas/", cat: "workshop", description: "In dieser Session verschmelzen kraftvolles Yoga und heiliges Pranayama zu einer Medizin für Körper, Geist und Seele." },
+      { time: "12.45–14.15", location: "Kuhstall", title: "Embody the light Yoga", people: "Ulrike Manhart", url: "https://catcow.de/embody-the-light-yoga-ulrike/", cat: "yoga", description: "Es ist ein sich einweben in ein Feld, das Menschen nährt, verbindet und transformiert. Embody the light Yoga – Ulrike\nEmbody the Light(Lichtverkörperung · Lichtkörperaktivierung · Slow Flow Yoga)Tauche ein in einen sanften, fließenden Yogaraum, der dich einlädt, dein inneres…" },
       { time: "15.00–16.30", location: "Kuhstall", title: "Shamanic Kundalini", people: "Sashiva", url: "https://catcow.de/shamanic-kundalini-sashiva/", cat: "yoga" },
       { time: "17.00–18.30", location: "Kuhstall", title: "YinYoga Focusing", people: "Natalie Merl", url: "", cat: "yoga" },
-      { time: "19.30–20.30", location: "Kuhstall", title: "Konzert", people: "Seom", url: "https://catcow.de/seom-konzert/", cat: "musik" },
-      { time: "21.30–23.30", location: "Kuhstall", title: "Konzert", people: "Pachamantra", url: "https://catcow.de/pacha-mantra/", cat: "musik" },
-      { time: "07.30–08.30", location: "Cathouse", title: "Kundalini Yoga", people: "Sarah Creations", url: "https://catcow.de/kundalini-yoga-sarah-creations/", cat: "yoga" },
+      { time: "19.30–20.30", location: "Kuhstall", title: "Konzert", people: "Seom", url: "https://catcow.de/seom-konzert/", cat: "musik", description: "Die große SEOM Tour nimmt dich mit auf eine Reise zu dir selbst und zu deiner Essenz. Seom – Konzert\nBereite dich auf einen besonderen Abend vor, der dein Herz berührt und dich an das erinnert, was wirklich zählt: Verbindung, Heilung und Menschlichkeit." },
+      { time: "21.30–23.30", location: "Kuhstall", title: "Konzert", people: "Pachamantra", url: "https://catcow.de/pacha-mantra/", cat: "musik", description: "Bist Du bereit, Dich von der Musik in die Tiefen Deines Herzens tragen zu lassen? Get ready for PACHAMANTRA at Cat&Cow-Festival 2026!\nPacha Mantra aus Leipzig definiert Mantramusik neu und bringt frischen Wind in die traditionelle Szene." },
+      { time: "07.30–08.30", location: "Cathouse", title: "Kundalini Yoga", people: "Sarah Creations", url: "https://catcow.de/kundalini-yoga-sarah-creations/", cat: "yoga", description: "Breath, mantra & movement to expand consciousness and elevate energy. Kundalini Yoga – Sarah Creations\nKriya: https://www.instagram.com/reels/CtOH8t8MII-/" },
       { time: "09.00–10.30", location: "Cathouse", title: "Tief Verwurzelt", people: "Steffi & Kerstin", url: "", cat: "workshop" },
       { time: "11.00–12.30", location: "Cathouse", title: "Root to Heart", people: "Sina & Ramona", url: "", cat: "yoga" },
-      { time: "13.00–14.30", location: "Cathouse", title: "Maitreya Flow", people: "Christian Seiffert", url: "https://catcow.de/energetic-movement-christian-seiffert/", cat: "yoga" },
+      { time: "13.00–14.30", location: "Cathouse", title: "Maitreya Flow", people: "Christian Seiffert", url: "https://catcow.de/energetic-movement-christian-seiffert/", cat: "yoga", description: "Wir freuen uns riesig, Christian Seiffert auch in diesem Jahr wieder in unserer Cat&Cow-Familie begrüßen zu dürfen! Christian ist von Beginn an ein fester Bestandteil unseres Festivals – sowohl als Workshop-Leiter als auch als Musiker." },
       { time: "15.00–16.30", location: "Cathouse", title: "Yoga Basics für alle", people: "Verena Straub", url: "", cat: "yoga" },
       { time: "17.00–18.30", location: "Cathouse", title: "Yoga Doc – eine Reise durch die Faszien", people: "Ronald Steiner", url: "", cat: "yoga" },
       { time: "20.00–22.30", location: "Cathouse", title: "Kuschelkreis", people: "Lara Luckwaldt", url: "", cat: "workshop" },
-      { time: "08.30–10.00", location: "Om Tempel", title: "TaoTwerkShop (für Frauen)", people: "Aurora Elyson", url: "https://catcow.de/tao-twerkshop-aurora-elysion/", cat: "workshop" },
-      { time: "10.30–12.30", location: "Om Tempel", title: "AUM – von Veresh (Osho)", people: "Yuni & Paddi", url: "https://catcow.de/aum-awareness-understanding-meditation-yuni-paddi/", cat: "meditation" },
-      { time: "13.00–14.30", location: "Om Tempel", title: "Human Design WS", people: "Claudia Heinicke", url: "https://catcow.de/human-design-embodied-claudia/", cat: "workshop" },
-      { time: "15.00–16.30", location: "Om Tempel", title: "Herzöffnung – Hypnose & Klangreise in deine Selbstliebe", people: "Sarah Löber", url: "https://catcow.de/herzoeffnung-hypnose-klangreise-in-deine-selbstliebe-sarah/", cat: "kreis" },
+      { time: "08.30–10.00", location: "Om Tempel", title: "TaoTwerkShop (für Frauen)", people: "Aurora Elyson", url: "https://catcow.de/tao-twerkshop-aurora-elysion/", cat: "workshop", description: "Drop it! Shake it! Whine up! Twerk it!\nKomm zu einem Workshop, der dein Leben bereichert! Tao TwerkShop – Aurora Elysion\nBei Tao Twerk lernst du die Grundlagen und Techniken des Twerking." },
+      { time: "10.30–12.30", location: "Om Tempel", title: "AUM – von Veresh (Osho)", people: "Yuni & Paddi", url: "https://catcow.de/aum-awareness-understanding-meditation-yuni-paddi/", cat: "meditation", description: "Die Awareness Understanding Meditation ist wild und laut, verrückt und sexy, verbindend und unvergesslich.\nSie ist eine aktive, dynamische und tief transformierende Expedition durch dein Inneres." },
+      { time: "13.00–14.30", location: "Om Tempel", title: "Human Design WS", people: "Claudia Heinicke", url: "https://catcow.de/human-design-embodied-claudia/", cat: "workshop", description: "Human Design ist kein mentales Konzept – es will gelebt werden. Human Design Embodied – Verstehen. Verkörpern. Verbinden. mit Claudia Heinicke\nIn diesem Workshop tauchen wir in die Verkörperung deiner Chart ein." },
+      { time: "15.00–16.30", location: "Om Tempel", title: "Herzöffnung – Hypnose & Klangreise in deine Selbstliebe", people: "Sarah Löber", url: "https://catcow.de/herzoeffnung-hypnose-klangreise-in-deine-selbstliebe-sarah/", cat: "kreis", description: "Zwischen all der Festivalenergie entsteht hier ein Raum für Stille.\nEin Raum für dich. Für dein Herz. Für echte Begegnung mit dir selbst." },
       { time: "17.00–18.30", location: "Om Tempel", title: "Vortrag: Rohkost for Lowcost", people: "Samu Raw Spirit", url: "https://catcow.de/vortrag-fuer-50e-im-monat-gesund-leben-rohkoestlich-vegan-samu-rawspirit/", cat: "workshop" },
-      { time: "20.00–00.00", location: "Om Tempel", title: "Tantric Slow Dating", people: "Soluna & Patrick", url: "https://catcow.de/tantric-slow-dating-soluna-patrick/", cat: "kreis" },
+      { time: "20.00–00.00", location: "Om Tempel", title: "Tantric Slow Dating", people: "Soluna & Patrick", url: "https://catcow.de/tantric-slow-dating-soluna-patrick/", cat: "kreis", description: "Soluna und Patrick laden dich ein in einen zarten, tantrisch-sinnlichen Raum voller Präsenz und tiefer Begegnung – für alle, die sich nach einer erfüllenden Verbindung, einer bewussten Beziehung oder einer magischen Festival-Liebelei sehnen." },
       { time: "08.15–09.45", location: "Saustall", title: "Yoga & Spiraldynamik", people: "Sven Schmieder", url: "", cat: "workshop" },
-      { time: "10.15–11.45", location: "Saustall", title: "Tri Yoga", people: "Janett", url: "https://catcow.de/tri-yoga-mit-janett/", cat: "yoga" },
+      { time: "10.15–11.45", location: "Saustall", title: "Tri Yoga", people: "Janett", url: "https://catcow.de/tri-yoga-mit-janett/", cat: "yoga", description: "Triyoga & Workshop Energetische Hausapotheke – Tipps und Tricks für Dich und Deine Kids\nTriYoga Tanzen auf dem Meeresboden. Erlebe und fühle mit der Welle Deiner Atmung einen einzigartigen Flow durch die Kombination von Yoga Asanas und altindischer Mudras." },
       { time: "12.15–13.45", location: "Saustall", title: "Flex Yoga", people: "Sven Petri", url: "", cat: "yoga" },
-      { time: "14.30–16.00", location: "Saustall", title: "Selbstliebe – tägl. Praktische Routine", people: "Alexandra David", url: "", cat: "yoga" },
-      { time: "16.30–18.30", location: "Saustall", title: "Somatic Speed Dating", people: "Mona Rauber", url: "https://catcow.de/somatic-speed-dating-mona/", cat: "workshop" },
-      { time: "10.00–12.00", location: "Strand", title: "Peace within – Kakao, Breath & Sound", people: "Jennya & Friends", url: "https://catcow.de/peace-within-kakao-breath-sound-jennya-stella-yan-lukas/", cat: "kreis" },
-      { time: "12.30–14.30", location: "Strand", title: "Trommel WS", people: "Georg", url: "https://catcow.de/trommelworkshop-georg/", cat: "workshop" },
-      { time: "15.30–16.30", location: "Strand", title: "Konzert", people: "Yilmaz", url: "https://catcow.de/live-spiritual-pop-yilmaz-koshua/", cat: "musik" },
-      { time: "17.30–19.30", location: "Strand", title: "DoubleWave ~ Ecstatic Dance Journey", people: "Maik & Riccarda", url: "https://catcow.de/doublewave-ecstatic-dance-journey-maik-riccarda/", cat: "workshop" },
-      { time: "09.00–10.30", location: "Freundeskreis", title: "Wildkräuterwanderung", people: "Bibi Kräuterfee", url: "https://catcow.de/wildkraeuterspaziergang-bibi/", cat: "workshop" },
+      { time: "14.30–16.00", location: "Saustall", title: "Selbstliebe – tägl. Praktische Routine", people: "Alexandra David", url: "https://catcow.de/mindful-me-time-workshop-alexandra/", cat: "yoga", description: "Finde zurück zu dir: Selbstliebe durch Yoga, Selbstmassage & Stärken sammeln. Im Trubel des Alltags geht die wichtigste Beziehung oft verloren: die zu uns selbst. Diese Sessions sind deine Einladung, den Pausenknopf zu drücken, dein Nervensystem zu regulieren und dir mit echter Wertschätzung zu begegnen." },
+      { time: "16.30–18.30", location: "Saustall", title: "Somatic Speed Dating", people: "Mona Rauber", url: "https://catcow.de/somatic-speed-dating-mona/", cat: "workshop", description: "Finde neue Freundschaften, Flirts oder Gleichgesinnte für die Zeit des Festivals und darüber hinaus und lerne Menschen dabei ganzheitlich kennen. Somatic Speed Dating – Mona\nDu möchtest neue Leute auf dem Festival kennenlernen und dich im Kontakt mit anderen erfahren?" },
+      { time: "10.00–12.00", location: "Strand", title: "Peace within – Kakao, Breath & Sound", people: "Jennya & Friends", url: "https://catcow.de/peace-within-kakao-breath-sound-jennya-stella-yan-lukas/", cat: "kreis", description: "mit Jennya & FriendsDonnerstag 10-12:30 STRANDPeace Within: Kakao, Breath & Sound – Jennya, Stella, Yan & Lukas\nIn einer lauten und bewegten Welt kehren wir nach innen zurück – dorthin, wo Stille und Lebendigkeit zugleich entstehen.." },
+      { time: "12.30–14.30", location: "Strand", title: "Trommel WS", people: "Georg", url: "https://catcow.de/trommelworkshop-georg/", cat: "workshop", description: "Georg lädt im Rahmen des Cat & Cow Festivals zu einer intuitiven Trommelreise ein. Der Workshop richtet sich an Teilnehmer aller Erfahrungsstufen – vom Anfänger bis zum Fortgeschrittenen." },
+      { time: "15.30–16.30", location: "Strand", title: "Konzert", people: "Yilmaz", url: "https://catcow.de/live-spiritual-pop-yilmaz-koshua/", cat: "musik", description: "Yilmaz Koshua lädt ein zu einem Konzert, das mehr ist als Musik — eine Reise durch Hoffnung, Liebe und innere Stärke, begleitet von Stimme, Gitarre und einer großen Portion Herzwärme." },
+      { time: "17.30–19.30", location: "Strand", title: "DoubleWave ~ Ecstatic Dance Journey", people: "Maik & Riccarda", url: "https://catcow.de/doublewave-ecstatic-dance-journey-maik-riccarda/", cat: "workshop", description: "Warmup + 90 min DJ-Set mit Live ElementenDoubleWave ~ Ecstatic Dance Journey – Maik & Riccarda\nDurch vielfältige Musik und freies Tanzen reisen wir tiefer in die eigenen Körper, wecken Inneres auf und bringen ins Fließen, was lebendig ist." },
+      { time: "09.00–10.30", location: "Freundeskreis", title: "Wildkräuterwanderung", people: "Bibi Kräuterfee", url: "https://catcow.de/wildkraeuterspaziergang-bibi/", cat: "workshop", description: "Hallo, ich bin Bibi und ich freue mich riesig, euch abseits des Festivaltrubels in die faszinierende Welt der Wildkräuter zu entführen!" },
       { time: "10.00–12.00", location: "Freundeskreis", title: "Geschichtenbaum", people: "Michelle Jacobi", url: "", cat: "kreis" },
-      { time: "11.00–12.30", location: "Freundeskreis", title: "Christian & Simon – Haka Tanz", people: "", url: "https://catcow.de/haka-maori-krafttanz-fuer-alle-simon-christian/", cat: "workshop" },
-      { time: "12.45–13.05", location: "Freundeskreis", title: "Erdfriedenmeditation", people: "Falk & Nicole", url: "https://catcow.de/erdfrieden-durch-selbstfrieden-falk-nicole/", cat: "meditation" },
-      { time: "14.00–15.30", location: "Freundeskreis", title: "Vergebungsritual – zurück in die Verbindung", people: "Inga Jagadamba Stendel", url: "https://catcow.de/vergebungsritual-inga/", cat: "kreis" },
-      { time: "16.30–17.30", location: "Freundeskreis", title: "Hoola Hoop WS", people: "Lena Flowart", url: "https://catcow.de/hula-hoop-lena-flowart/", cat: "workshop" },
+      { time: "11.00–12.30", location: "Freundeskreis", title: "Christian & Simon – Haka Tanz", people: "", url: "https://catcow.de/haka-maori-krafttanz-fuer-alle-simon-christian/", cat: "workshop", description: "Der Haka ist ein kraftvoller, gemeinschaftsstärkender Ausdruckstanz aus Neuseeland, der Präsenz, Erdung und lebendige Verbindung erfahrbar macht – für alle zugänglich, körperlich und herzverbunden." },
+      { time: "12.45–13.05", location: "Freundeskreis", title: "Erdfriedenmeditation", people: "Falk & Nicole", url: "https://catcow.de/erdfrieden-durch-selbstfrieden-falk-nicole/", cat: "meditation", description: "Erdfrieden durch Selbstfrieden – Falk & Nicole\nWir heilen unser Herz & Wunden und nutzen dann\ndie Kraft dieser besonderen Technik, die Kraft der Sonne und des Mondes und beeinflussen das Geschehen auf der Erde bewusst mit Liebe." },
+      { time: "14.00–15.30", location: "Freundeskreis", title: "Vergebungsritual – zurück in die Verbindung", people: "Inga Jagadamba Stendel", url: "https://catcow.de/vergebungsritual-inga/", cat: "kreis", description: "Gibt es etwas – in dir oder in deinem Leben – das nach Vergebung ruft? Vergebungsritual – zurück in die Verbindung mit Inga\nUnvergebene Erfahrungen binden uns an Angst, Schutzmechanismen und alte Geschichten –\nmanchmal im Kontakt mit anderen, manchmal im stillen Kampf mit uns…" },
+      { time: "16.30–17.30", location: "Freundeskreis", title: "Hoola Hoop WS", people: "Lena Flowart", url: "https://catcow.de/hula-hoop-lena-flowart/", cat: "workshop", description: "Tauche ein in den Kreis und entdecke deinen Flow! Hula Hoop Workshop mit Lena\nIm „Hula Hoop“-Workshop mit Lena Flow Art erwartet dich eine 60-minütige Reise, die weit über das bloße Drehen eines Reifens hinausgeht." },
       { time: "17.00–19.00", location: "Freundeskreis", title: "Geschichtenbaum", people: "Michelle Jacobi", url: "", cat: "kreis" },
-      { time: "09.30–11.00", location: "Kräuterweide", title: "Seelenschreiben / Heilschreiben / Manifestieren", people: "Matthias Müller", url: "https://catcow.de/seelenschreiben-heilschreiben-manifestieren-matthias-mueller/", cat: "workshop" },
+      { time: "09.30–11.00", location: "Kräuterweide", title: "Seelenschreiben / Heilschreiben / Manifestieren", people: "Matthias Müller", url: "https://catcow.de/seelenschreiben-heilschreiben-manifestieren-matthias-mueller/", cat: "workshop", description: "Im Workshop „Seelenschreiben – Heilschreiben – Manifestieren“ gehen wir auf verschiedene Varianten des heilsamen und medialen Schreibens ein." },
       { time: "11.30–13.00", location: "Kräuterweide", title: "Nordische Runen", people: "Dorte Janussen", url: "", cat: "workshop" },
-      { time: "14.00–16.30", location: "Kräuterweide", title: "Handpan Workshop für Anfänger", people: "Max", url: "https://catcow.de/handpan-workshop-fuer-anfaenger-max/", cat: "workshop" },
+      { time: "14.00–16.30", location: "Kräuterweide", title: "Handpan Workshop für Anfänger", people: "Max", url: "https://catcow.de/handpan-workshop-fuer-anfaenger-max/", cat: "workshop", description: "Max ist Handpan-Spieler und Workshopleiter aus Leipzig und hat uns bereits die letzten Jahre mit der Handpan musikalisch begleitet." },
       { time: "09.00–10.00", location: "Feuerjurte", title: "Daily Sharing", people: "", url: "", cat: "kreis" },
       { time: "11.00–12.30", location: "Feuerjurte", title: "Tantrische Orgasmuskontrolle", people: "Christian Strangfeld", url: "", cat: "workshop" },
-      { time: "13.30–15.00", location: "Feuerjurte", title: "OM Kreis – Klang, Stimme, innere Resonanz", people: "Alina", url: "", cat: "kreis" },
-      { time: "16.00–17.30", location: "Feuerjurte", title: "Goldene 8", people: "Falk & Nicole", url: "https://catcow.de/die-goldene-acht-nicole-falk/", cat: "workshop" },
-      { time: "17.00–19.00", location: "Feuerjurte", title: "Impro Theater WS", people: "Meike & Tim", url: "https://catcow.de/improtheater-workshop-tim-meike/", cat: "workshop" },
+      { time: "13.30–15.00", location: "Feuerjurte", title: "OM Kreis – Klang, Stimme, innere Resonanz", people: "Alina Bielawski", url: "https://catcow.de/om-kreis-alina/", cat: "kreis", description: "Über Atem, Körper- und Stimmübungen öffnen wir einen Raum, in dem Klang unmittelbar erfahrbar wird – als Schwingung, Resonanz und Verbindung. Im gemeinsamen Tönen entsteht eine tiefe Erfahrung von Getragensein und Verbundenheit – mit Dir selbst, mit der Gruppe und mit dem, was größer ist als wir. Es geht nicht darum, „schön zu singen“, sondern Deinen eigenen Ton zu finden – Dein eigenes Instrument zu entdecken." },
+      { time: "16.00–17.30", location: "Feuerjurte", title: "Goldene 8", people: "Falk & Nicole", url: "https://catcow.de/die-goldene-acht-nicole-falk/", cat: "workshop", description: "Die goldene Acht ist eine spirituelle Praxis mit der man sich von allen Dingen, Mustern und Verbindungen befreien kann die nicht mehr dienlich sind. Die goldene Acht mit Nicole und Falk\nSie wurde mir vor vielen Jahren weitergegeben." },
+      { time: "17.00–19.00", location: "Feuerjurte", title: "Impro Theater WS", people: "Meike & Tim", url: "https://catcow.de/improtheater-workshop-tim-meike/", cat: "workshop", description: "Lass dich vom Zauber des Improtheaters mitreißen und wage den Sprung ins Unbekannte – hinein in ein Meer voller bunter Möglichkeiten! Bühne frei! – Improtheater-Workshop mit Tim & Meike\nIn jedem Menschen stecken Kreativität und Spielfreude – entdecke und erlebe sie mit uns!" },
       { time: "11.00–12.30", location: "AcroYoga", title: "AcroYoga Opening Jam", people: "", url: "", cat: "workshop" },
       { time: "12.30–13.45", location: "AcroYoga", title: "Introduction TwoMenHigh", people: "", url: "", cat: "workshop" },
       { time: "14.30–15.45", location: "AcroYoga", title: "Creative Flips & Rolls", people: "", url: "", cat: "workshop" },
@@ -652,48 +653,48 @@ const FESTIVAL_DATA = [
   {
     day: "Freitag",
     date: "03.07.2026",
-    special: [{ time: "13.00–14.00", label: "Stillezeit – (Pssss..)" }],
+    special: [{"time":"13.00–14.00","label":"Stillezeit – (Pssss..)"}],
     slots: [
-      { time: "08.45–10.15", location: "Kuhstall", title: "Power Hatha Yoga", people: "Andreas Koschwitz", url: "https://catcow.de/power-hatha-yoga-workbreathout-andreas/", cat: "yoga" },
-      { time: "10.45–12.45", location: "Kuhstall", title: "Deep Yin Yoga + Soundhealing", people: "Marko Kreddig, Paulina & Niyam", url: "https://catcow.de/deep-yin-yoga-marko-niyam-paulina/", cat: "yoga" },
-      { time: "14.00–15.30", location: "Kuhstall", title: "Klangschalen & Gong Meditation", people: "Yantra Sound Healing", url: "https://catcow.de/yantra-sound-bath-klangmeditation-sudip-cindy/", cat: "meditation" },
+      { time: "08.45–10.15", location: "Kuhstall", title: "Power Hatha Yoga", people: "Andreas Koschwitz", url: "https://catcow.de/power-hatha-yoga-workbreathout-andreas/", cat: "yoga", description: "In dieser Session verschmelzen kraftvolles Yoga und heiliges Pranayama zu einer Medizin für Körper, Geist und Seele." },
+      { time: "10.45–12.45", location: "Kuhstall", title: "Deep Yin Yoga + Soundhealing", people: "Marko Kreddig, Paulina & Niyam", url: "https://catcow.de/deep-yin-yoga-marko-niyam-paulina/", cat: "yoga", description: "Alles fliesst zusammen. Deep Yin Yoga – Marko, Niyam & Paulina\nYin Yoga für den harmonischen Energiefluss, Pranayama zur Atemenergetisierung und Soundhealing Gongbath zum tiefen Entspannen und Loslassen." },
+      { time: "14.00–15.30", location: "Kuhstall", title: "Klangschalen & Gong Meditation", people: "Yantra Sound Healing", url: "https://catcow.de/yantra-sound-bath-klangmeditation-sudip-cindy/", cat: "meditation", description: "Unser Wunsch ist es, Licht in die Welt zu tragen durch Klangheilung mit Klangschalen und Gong. Yantra Sound Bath\nKlangmeditation mit Sudip & Cindy\nDie TeilnehmerInnen meditieren in Shavasana, der Entspannungslage auf dem\nRücken." },
       { time: "16.00–17.30", location: "Kuhstall", title: "Vinyasa Flow", people: "Tatjana Roth", url: "", cat: "yoga" },
-      { time: "18.00–20.00", location: "Kuhstall", title: "F*ck, wie komm ich in Frieden", people: "Kristin Bianchi", url: "https://catcow.de/fck-wie-komme-ich-in-den-frieden-kristin-bianchi/", cat: "workshop" },
-      { time: "21.30–23.30", location: "Kuhstall", title: "Ecstatic Kirtan", people: "Sadbhuja, Michael Stewart & Friends", url: "https://catcow.de/ecstatic-kirtan-michael-patrick-sadbhuja-friends/", cat: "musik" },
-      { time: "08.30–10.00", location: "Cathouse", title: "Lotus Flow – Erwecke dein inneres Licht durch Yoga & Meditation", people: "Nadine Verde", url: "https://catcow.de/lotus-flow-nadine-verde/", cat: "yoga" },
+      { time: "18.00–20.00", location: "Kuhstall", title: "F*ck, wie komm ich in Frieden", people: "Kristin Bianchi", url: "https://catcow.de/fck-wie-komme-ich-in-den-frieden-kristin-bianchi/", cat: "workshop", description: "Frieden wollen wir alle. Mit uns selbst. Mit anderen. Mit der Welt. F*ck – wie komme ich in den Frieden? – Kristin Bianchi\nUnd dann hören wir überall:Loslassen. Vergeben. Liebe wählen. Klingt schön. Funktioniert nur erstaunlich oft nicht." },
+      { time: "21.30–23.30", location: "Kuhstall", title: "Ecstatic Kirtan", people: "Sadbhuja, Michael Stewart & Friends", url: "https://catcow.de/ecstatic-kirtan-michael-patrick-sadbhuja-friends/", cat: "musik", description: "Erlebe die transformative Kraft des gemeinsamen Singens bei unserem ekstatischen Kirtan am Freitagabend auf dem Cat & Cow Yoga & Healing Festival." },
+      { time: "08.30–10.00", location: "Cathouse", title: "Lotus Flow – Erwecke dein inneres Licht durch Yoga & Meditation", people: "Nadine Verde", url: "https://catcow.de/lotus-flow-nadine-verde/", cat: "yoga", description: "Erwecke dein inneres Licht durch Yoga und MeditationLotus Flow – Nadine Verde\nDie Lotusblume ist ein kraftvolles Symbol für geistige Reinheit, Transformation und\ninneren Frieden." },
       { time: "10.30–12.30", location: "Cathouse", title: "GetHighOnYourOwnSupply® – Atemreise", people: "Phillip Friedel", url: "", cat: "meditation" },
-      { time: "14.00–15.30", location: "Cathouse", title: "Your Body, your Medicine Yoga (& Kakao)", people: "Claudia Heinicke", url: "https://catcow.de/medicine-yoga-kakao-claudia-heinicke/", cat: "yoga" },
-      { time: "16.00–17.30", location: "Cathouse", title: "Yoga Nidra – SaerMeditations", people: "Francisco", url: "https://catcow.de/yoga-nidra-francisco-alonso/", cat: "meditation" },
-      { time: "18.00–20.00", location: "Cathouse", title: "SOMAtantra mit Gongpuja – Integration weiblicher & männlicher Aspekt", people: "Rüdiger Har Anand", url: "", cat: "workshop" },
+      { time: "14.00–15.30", location: "Cathouse", title: "Your Body, your Medicine Yoga (& Kakao)", people: "Claudia Heinicke", url: "https://catcow.de/medicine-yoga-kakao-claudia-heinicke/", cat: "yoga", description: "Your Body – Your Medicine Kakao & Yoga In diesem Raum wird der Körper zur Medizin – und Kakao zu unserer Wegbegleiterin." },
+      { time: "16.00–17.30", location: "Cathouse", title: "Yoga Nidra – SaerMeditations", people: "Francisco", url: "https://catcow.de/yoga-nidra-francisco-alonso/", cat: "meditation", description: "Yoga Nidra ist eine geführte Meditation im Liegen, die Körper und Geist auf allen Ebenen entspannt, regeneriert und wieder miteinander verbindet." },
+      { time: "18.00–20.00", location: "Cathouse", title: "SOMAtantra mit Gongpuja – Integration weiblicher & männlicher Aspekt", people: "Rüdiger Har Anand", url: "https://catcow.de/soma-tantra-kundalini-gatka-ruediger-har-anand/", cat: "workshop", description: "SOMA ist reine Medizin für die Seele, mit Wurzeln im Kundalini Yoga und der Tradition der Sufis. Bewegung, Klang, Atem und Trancetechniken ermöglichen in der Gruppe den Zugang zu einem erhöhten Bewusstseinszustand. Wir begeben uns auf eine zeitlose Klangreise – Gongs und Gesang tragen uns in sanften rhythmischen Wellen durch die Zeit, auch während des Schlafs (Gongpuja)." },
       { time: "21.15–00.15", location: "Cathouse", title: "Kuschelparty", people: "Elisa Meyer", url: "", cat: "workshop" },
       { time: "08.45–10.15", location: "Om Tempel", title: "Weibliche Urkraft (für Frauen)", people: "Vanessa Prisack", url: "", cat: "yoga" },
       { time: "10.45–12.45", location: "Om Tempel", title: "Achtsamkeit in Beziehungen", people: "Benjamin Joon", url: "", cat: "workshop" },
       { time: "14.00–15.30", location: "Om Tempel", title: "Rauch und Klang – zur Essenz deiner Träume", people: "Steffi Grub", url: "https://catcow.de/rauchklang-energetische-reise-zur-essenz-deiner-traeume-steffi/", cat: "meditation" },
       { time: "16.30–18.00", location: "Om Tempel", title: "Frauenkreis", people: "Claudia Gärtner", url: "", cat: "kreis" },
-      { time: "18.30–20.00", location: "Om Tempel", title: "Germanenvortrag + Ritual Sphinx", people: "Sphinx", url: "https://catcow.de/eine-reise-zu-den-germanischen-wurzeln-sphinx/", cat: "kreis" },
+      { time: "18.30–20.00", location: "Om Tempel", title: "Germanenvortrag + Ritual Sphinx", people: "Sphinx", url: "https://catcow.de/eine-reise-zu-den-germanischen-wurzeln-sphinx/", cat: "kreis", description: "„Die moderne Welt ist voll von spirituellen Waisenkindern, die versuchen, ihre Leere mit den Federn und Ritualen anderer Kulturen zu füllen." },
       { time: "09.00–10.30", location: "Saustall", title: "Yoga für den Alltag", people: "Maxi Hoffmann", url: "", cat: "yoga" },
       { time: "11.15–12.45", location: "Saustall", title: "Forrest Yoga", people: "Markus Marx", url: "https://catcow.de/forrest-yoga-hang-ab-markus-marx/", cat: "yoga" },
       { time: "14.15–15.45", location: "Saustall", title: "(mind to heart) Hatha Yoga", people: "Sabrina", url: "https://catcow.de/flow-into-heart-yoga-sabrina/", cat: "yoga" },
-      { time: "16.15–17.45", location: "Saustall", title: "Dein Atem – Dein Tempel", people: "Jennya & Sisam", url: "https://catcow.de/dein-atem-dein-tempel-jennya-sisam/", cat: "workshop" },
+      { time: "16.15–17.45", location: "Saustall", title: "Dein Atem – Dein Tempel", people: "Jennya & Sisam", url: "https://catcow.de/dein-atem-dein-tempel-jennya-sisam/", cat: "workshop", description: "Freitag  16:15-17:45 SAUSTALLDein Atem – dein Tempel – Jennya & Sisam\nEs gibt einen Ort in dir, der immer da ist.\nStill. Ehrlich. Weit.\nEinen Raum, den du nicht suchen musst — sondern erinnern.\nUnd dein Atem kennt den Weg dorthin." },
       { time: "18.15–19.15", location: "Saustall", title: "Singing Circle", people: "Sarah Creations & Friends", url: "", cat: "kreis" },
-      { time: "05.00", location: "Strand", title: "Agnihotra – vedisches Feuerritual", people: "Felix & Maxi Hoffmann", url: "https://catcow.de/agnihotra-vedisches-feuerritual-maxi-felix/", cat: "kreis" },
+      { time: "05.00", location: "Strand", title: "Agnihotra – vedisches Feuerritual", people: "Felix & Maxi Hoffmann", url: "https://catcow.de/agnihotra-vedisches-feuerritual-maxi-felix/", cat: "kreis", description: "Agnihotra ist ein uraltes vedisches Feuerritual, das traditionell exakt zu den energetischen Wendepunkten des Tages – dem Sonnenaufgang und dem Sonnenuntergang – praktiziert wird." },
       { time: "10.00–12.30", location: "Strand", title: "Kakaoreise", people: "Moppel & Mareike", url: "", cat: "kreis" },
-      { time: "14.00–16.00", location: "Strand", title: "Wild Woman Dance", people: "Lena", url: "https://catcow.de/wild-women-dance-lena/", cat: "workshop" },
-      { time: "16.30–18.30", location: "Strand", title: "Trommelworkshop", people: "Georg", url: "https://catcow.de/trommelworkshop-georg/", cat: "workshop" },
-      { time: "07.30–08.30", location: "Freundeskreis", title: "Qi Gong", people: "Monique Hunger", url: "https://catcow.de/qi-gong-monique/", cat: "yoga" },
-      { time: "10.30–13.00", location: "Freundeskreis", title: "Kampfkunst / Selbstverteidigung", people: "Christian Seiffert", url: "https://catcow.de/energetic-movement-christian-seiffert/", cat: "workshop" },
+      { time: "14.00–16.00", location: "Strand", title: "Wild Woman Dance", people: "Lena", url: "https://catcow.de/wild-women-dance-lena/", cat: "workshop", description: "Lena ist eine Flow-Künstlerin, Tänzerin und professionelle Psychotherapeutin, deren Leidenschaft darin besteht, den Körper als Instrument tiefen Wissens und Weisheit zu nutzen." },
+      { time: "16.30–18.30", location: "Strand", title: "Trommelworkshop", people: "Georg", url: "https://catcow.de/trommelworkshop-georg/", cat: "workshop", description: "Georg lädt im Rahmen des Cat & Cow Festivals zu einer intuitiven Trommelreise ein. Der Workshop richtet sich an Teilnehmer aller Erfahrungsstufen – vom Anfänger bis zum Fortgeschrittenen." },
+      { time: "07.30–08.30", location: "Freundeskreis", title: "Qi Gong", people: "Monique Hunger", url: "https://catcow.de/qi-gong-monique/", cat: "yoga", description: "Qi Gong ist eine jahrtausendealte Praxis, die Körper und Geist in\nEinklang bringt. Qi Gong – Monique\nMit sanften Bewegungen, Atemübungen und meditativer\nKonzentration unterstützt Qi Gong die Gesundheit, erhöht das\nWohlbefinden und hilft dabei, den Tag zentriert und gestärkt…" },
+      { time: "10.30–13.00", location: "Freundeskreis", title: "Kampfkunst / Selbstverteidigung", people: "Christian Seiffert", url: "https://catcow.de/energetic-movement-christian-seiffert/", cat: "workshop", description: "Wir freuen uns riesig, Christian Seiffert auch in diesem Jahr wieder in unserer Cat&Cow-Familie begrüßen zu dürfen! Christian ist von Beginn an ein fester Bestandteil unseres Festivals – sowohl als Workshop-Leiter als auch als Musiker." },
       { time: "11.00–13.00", location: "Freundeskreis", title: "Kräuterwanderung", people: "Dana Springborn", url: "", cat: "workshop" },
-      { time: "12.30–12.50", location: "Freundeskreis", title: "Erdfriedenmeditation", people: "Falk & Nicole", url: "https://catcow.de/erdfrieden-durch-selbstfrieden-falk-nicole/", cat: "meditation" },
-      { time: "14.00–15.30", location: "Freundeskreis", title: "Baumperlen Workshop", people: "Alexandra", url: "https://catcow.de/baumperlenworkshop-alexandra-bianca/", cat: "workshop" },
-      { time: "15.00–16.30", location: "Freundeskreis", title: "Aroha Workshop", people: "Anke Lorenz", url: "https://catcow.de/im-einklang-mit-dir-aroha-erleben-anke/", cat: "workshop" },
-      { time: "10.30–13.00", location: "Kräuterweide", title: "Handpan Workshop für Anfänger (Anmeldung am Infopoint/max. 15 Menschen)", people: "Max", url: "https://catcow.de/handpan-workshop-fuer-anfaenger-max/", cat: "workshop" },
-      { time: "11.00–13.00", location: "Kräuterweide", title: "Macht der Mondin", people: "Rebecca Stöhr", url: "https://catcow.de/mondphasen-zykluswissen-workshop-rebecca/", cat: "workshop" },
+      { time: "12.30–12.50", location: "Freundeskreis", title: "Erdfriedenmeditation", people: "Falk & Nicole", url: "https://catcow.de/erdfrieden-durch-selbstfrieden-falk-nicole/", cat: "meditation", description: "Erdfrieden durch Selbstfrieden – Falk & Nicole\nWir heilen unser Herz & Wunden und nutzen dann\ndie Kraft dieser besonderen Technik, die Kraft der Sonne und des Mondes und beeinflussen das Geschehen auf der Erde bewusst mit Liebe." },
+      { time: "14.00–15.30", location: "Freundeskreis", title: "Baumperlen Workshop", people: "Alexandra", url: "https://catcow.de/baumperlenworkshop-alexandra-bianca/", cat: "workshop", description: "Baumperlen sind eine besondere Kraft des Baumes und können an uns weitergegeben werdenBaumperlenworkshop – Alexandra & Bianca\nSuchen & Finden:\nGemeinsam tauschen wir uns über Baumperlen aus – was sie sind, wo und wie sie gefunden werden können." },
+      { time: "15.00–16.30", location: "Freundeskreis", title: "Aroha Workshop", people: "Anke Lorenz", url: "https://catcow.de/im-einklang-mit-dir-aroha-erleben-anke/", cat: "workshop", description: "Ich bin Anke Lorenz, zertifizierte AROHA-Trainerin und Gründerin von „SportAnke – Körper spüren. Klarheit finden.“Ich liebe es, Menschen über Bewegung wieder in Kontakt mit sich selbst zu bringen – ohne Leistungsdruck, dafür mit viel Freude, Rhythmus und einem guten Körpergefühl." },
+      { time: "10.30–13.00", location: "Kräuterweide", title: "Handpan Workshop für Anfänger (Anmeldung am Infopoint/max. 15 Menschen)", people: "Max", url: "https://catcow.de/handpan-workshop-fuer-anfaenger-max/", cat: "workshop", description: "Max ist Handpan-Spieler und Workshopleiter aus Leipzig und hat uns bereits die letzten Jahre mit der Handpan musikalisch begleitet." },
+      { time: "11.00–13.00", location: "Kräuterweide", title: "Macht der Mondin", people: "Rebecca Stöhr", url: "https://catcow.de/mondphasen-zykluswissen-workshop-rebecca/", cat: "workshop", description: "Zaubern. Beten. Manifestieren. Am Ende sprechen wir über dasselbe: bewusstes Erschaffen. Mondphasen & Zykluswissen Workshop – Rebecca\nWir leben in einer Welt, die auf maskuline, lineare 24/7-Leistung ausgerichtet ist." },
       { time: "09.00–10.00", location: "Feuerjurte", title: "Daily Sharing", people: "", url: "", cat: "kreis" },
       { time: "14.15–16.15", location: "Kräuterweide", title: "Ayurveda Vortrag + Praxis", people: "Marcus Schons", url: "", cat: "workshop" },
-      { time: "14.15–16.15", location: "Feuerjurte", title: "Männerkreis Verantwortung", people: "Falk + Rico", url: "", cat: "kreis" },
-      { time: "16.00–17.00", location: "Feuerjurte", title: "Auravortrag", people: "Siri Nirmal", url: "https://catcow.de/tantra-yoga-vortrag-aura-siri-nirmal/", cat: "workshop" },
+      { time: "14.15–16.15", location: "Feuerjurte", title: "Männerkreis Verantwortung", people: "Falk + Rico", url: "https://catcow.de/maennerkreis-falk-rico/", cat: "kreis", description: "Ist es meine Verantwortung, ist es deine Verantwortung? Muss ich das tun? Du bist schuld!! Verantwortung steckt in jedem Moment – eine Königsdisziplin, diese zu sehen und zu übernehmen. Und genau das machen wir hier!" },
+      { time: "16.00–17.00", location: "Feuerjurte", title: "Auravortrag", people: "Siri Nirmal", url: "https://catcow.de/tantra-yoga-vortrag-aura-siri-nirmal/", cat: "workshop", description: "Siri Nirmal is in Sibirien in einer Heilerfamilie geboren und nahe Altai Gebirge aufgewachsen. Seit ihrer Kindheit meistert Siri verschiedene Heilungstechniken wie Dzen, Shamanismus, Kundalini Yoga, Tantra." },
       { time: "17.00–18.30", location: "Feuerjurte", title: "Herzöffnung für Frauen", people: "Aurora Elysion", url: "", cat: "kreis" },
-      { time: "17.30–19.00", location: "Feuerjurte", title: "Männerkreis", people: "Torsten & Sören", url: "https://catcow.de/maennerkraftkreis-soeren-torsten/", cat: "kreis" },
+      { time: "17.30–19.00", location: "Feuerjurte", title: "Männerkreis", people: "Torsten & Sören", url: "https://catcow.de/maennerkraftkreis-soeren-torsten/", cat: "kreis", description: "Tauche ein in Deine Kraft, Deine Stimme & Deinem Mannsein. Männerkraftkreis – Sören & Torsten\nTönen, singen, toben, Stille spüren – Herz, Körper & innere Kraft öffnen.\nCo-kreativ, drogenfrei, voller echter Begegnung unter Männern.\nBring dich ein! Erlebe die Magie des Kreises!" },
       { time: "11.00–12.15", location: "AcroYoga", title: "Qi Gong", people: "", url: "", cat: "workshop" },
       { time: "12.30–13.45", location: "AcroYoga", title: "Introduction to Pops", people: "", url: "", cat: "workshop" },
       { time: "14.30–15.45", location: "AcroYoga", title: "Movement Playground", people: "", url: "", cat: "yoga" },
@@ -701,7 +702,7 @@ const FESTIVAL_DATA = [
       { time: "17.30–19.00", location: "AcroYoga", title: "Tanzakrobatik", people: "Sven", url: "", cat: "workshop" },
       { time: "Täglich 12.00–15.00", location: "SUP Yoga", title: "Sup Verleih mit Einweisung (inkl. Schwimmweste für Kinder)", people: "", url: "", cat: "workshop" },
       { time: "09.30", location: "SUP Yoga", title: "NEU: Yin-WOGA", people: "", url: "", cat: "yoga" },
-      { time: "17.00", location: "SUP Yoga", title: "WOGA SUP Yoga", people: "", url: "https://catcow.de/woga-sup-yoga-academy/", cat: "yoga" },
+      { time: "17.00", location: "SUP Yoga", title: "WOGA SUP Yoga", people: "", url: "https://catcow.de/woga-sup-yoga-academy/", cat: "yoga", description: "Yoga auf dem Wasser! Und das auf dem Mondsee. Die WOGA SUP Yoga Academy ist mit von der Partie! WOGA SUP von der Yoga Academy\nWOGA ist die 1. SUP Yoga Academy Deutschlands für Stand Up Paddle & Yoga Kurse , Event & Ausbildungen in Deutschland und der Welt !" },
       { time: "09.00–10.00", location: "Kidsspace", title: "Yoga & Spiel", people: "Robert", url: "", cat: "kids" },
       { time: "10.00–11.00", location: "Kidsspace", title: "Outdoor Suchspiel (kleine Tasche/Eimer mitbringen)", people: "Maren", url: "", cat: "kids" },
       { time: "10.00–11.00", location: "Kidsspace", title: "Holzbau Workshop Teil1 2h (Max. 8 Kids / ab 8 J.)", people: "Andi & Micha", url: "", cat: "kids" },
@@ -729,47 +730,47 @@ const FESTIVAL_DATA = [
   {
     day: "Samstag",
     date: "04.07.2026",
-    special: [{ time: "14.00–16.00", label: "FESTIVALPARADE – Treffpunkt Feuerstelle, danach Paraden Dance (Strand)" }],
+    special: [{"time":"14.00–16.00","label":"FESTIVALPARADE – Treffpunkt Feuerstelle, danach Paraden Dance (Strand)"}],
     slots: [
       { time: "07.45–09.15", location: "Kuhstall", title: "YOGA \"Fall into P.A.R.T.S\"", people: "Susann Kind", url: "", cat: "yoga" },
       { time: "09.45–11.15", location: "Kuhstall", title: "Sacred Union Yoga", people: "Julia & Max", url: "", cat: "yoga" },
-      { time: "11.45–13.45", location: "Kuhstall", title: "authentisches Kundalini mit Shamanic WhitSound-Gongmeditation", people: "Rüdiger HarAnand", url: "https://catcow.de/soma-tantra-kundalini-gatka-ruediger-har-anand/", cat: "meditation" },
-      { time: "16.00–17.15", location: "Kuhstall", title: "Klangtempel / Soundbath mit Gongs", people: "Christian Seiffert & Friends", url: "https://catcow.de/energetic-movement-christian-seiffert/", cat: "meditation" },
-      { time: "17.45–19.15", location: "Kuhstall", title: "Yang to Ying", people: "Nadine Verde", url: "https://catcow.de/lotus-flow-nadine-verde/", cat: "yoga" },
-      { time: "20.15–21.30", location: "Kuhstall", title: "Konzert", people: "Facesoul", url: "https://catcow.de/facesoul-konzert-faisal-salah/", cat: "musik" },
+      { time: "11.45–13.45", location: "Kuhstall", title: "authentisches Kundalini mit Shamanic WhitSound-Gongmeditation", people: "Rüdiger HarAnand", url: "https://catcow.de/soma-tantra-kundalini-gatka-ruediger-har-anand/", cat: "meditation", description: "Auch dieses Jahr ist Rüdiger Har Anand wieder mit seiner Trilogie dabei:– SOMAtantra mit Gongpuja – Integration weiblicher und männlicher Aspekt– authentisches Kundalini mit ShamanicWhiteSoundGongmeditation – Transformation im Hier und Jetzt– GATKA – Kampfkunst der neuen Zeit?" },
+      { time: "16.00–17.15", location: "Kuhstall", title: "Klangtempel / Soundbath mit Gongs", people: "Christian Seiffert & Friends", url: "https://catcow.de/energetic-movement-christian-seiffert/", cat: "meditation", description: "Wir freuen uns riesig, Christian Seiffert auch in diesem Jahr wieder in unserer Cat&Cow-Familie begrüßen zu dürfen! Christian ist von Beginn an ein fester Bestandteil unseres Festivals – sowohl als Workshop-Leiter als auch als Musiker." },
+      { time: "17.45–19.15", location: "Kuhstall", title: "Yang to Ying", people: "Nadine Verde", url: "https://catcow.de/lotus-flow-nadine-verde/", cat: "yoga", description: "Erwecke dein inneres Licht durch Yoga und MeditationLotus Flow – Nadine Verde\nDie Lotusblume ist ein kraftvolles Symbol für geistige Reinheit, Transformation und\ninneren Frieden." },
+      { time: "20.15–21.30", location: "Kuhstall", title: "Konzert", people: "Facesoul", url: "https://catcow.de/facesoul-konzert-faisal-salah/", cat: "musik", description: "Facesoul Konzert – poetischer Soul von Faisal SalahSeine Musik verbindet gefühlvollen Gesang mit poetischem Storytelling und spiegelt die Eindrücke seiner Reisen sowie seine persönlichen Erfahrungen wider." },
       { time: "22.15–23.30", location: "Kuhstall", title: "Konzert", people: "Makia", url: "https://catcow.de/konzert-makia/", cat: "musik" },
-      { time: "08.15–09.45", location: "Cathouse", title: "The Power Practice – Yoga für Kraft & Klarheit", people: "Lynn Rappich", url: "https://catcow.de/the-power-practice-yoga-mit-lynn/", cat: "yoga" },
-      { time: "10.15–11.45", location: "Cathouse", title: "Moving Meditation – Vinyasa Flow", people: "Mona Becker", url: "https://catcow.de/vinyasa-flow-moving-meditation-mona/", cat: "yoga" },
+      { time: "08.15–09.45", location: "Cathouse", title: "The Power Practice – Yoga für Kraft & Klarheit", people: "Lynn Rappich", url: "https://catcow.de/the-power-practice-yoga-mit-lynn/", cat: "yoga", description: "Bevor der Tag dich formt – formst du deine Energie. Diese Morgenpraxis richtet dich aus, bevor du reagierst. Power in Presence – The Power Practice mit Lynn\n„Power in Presence“ vereint länger gehaltene Asanas, bewusste Atemführung, Bandha-Aktivierung und energetische Impulse zu…" },
+      { time: "10.15–11.45", location: "Cathouse", title: "Moving Meditation – Vinyasa Flow", people: "Mona Becker", url: "https://catcow.de/vinyasa-flow-moving-meditation-mona/", cat: "yoga", description: "In dieser 90-minütigen Vinyasa-Session erwartet dich ein fließender, kraftvoller und zugleich achtsamer Flow, der dich ganz ins Spüren bringt." },
       { time: "12.15–13.45", location: "Cathouse", title: "Subtle Body Practices – Sound Scapes", people: "Benjamin & Nils und Kollektiv", url: "", cat: "musik" },
       { time: "16.15–17.45", location: "Cathouse", title: "HathaFlow", people: "Veda", url: "", cat: "yoga" },
-      { time: "19.00–21.00", location: "Cathouse", title: "Schamanischer Trommel-Seelengesang-Musizierkreis", people: "Mariann", url: "https://catcow.de/schamanischer-trommel-seelengesang-musizierkreis-mariann/", cat: "kreis" },
-      { time: "20.30–00.00", location: "Cathouse", title: "Tantrischer Tempelabend – Reise in die liebevolle Sinnlichkeit", people: "Cornelia & Franz", url: "https://catcow.de/tantra-temple-eine-reise-in-die-sinnlichkeit-cornelia-franz/", cat: "workshop" },
-      { time: "08.15–09.45", location: "Om Tempel", title: "Achtsamkeit gegen Angst", people: "Markus Kube", url: "", cat: "meditation" },
-      { time: "10.15–11.45", location: "Om Tempel", title: "Herzkohärenz Meditation", people: "Marion Schneider", url: "https://catcow.de/herzkohaerenz-lightcodes-marion/", cat: "meditation" },
-      { time: "12.15–13.45", location: "Om Tempel", title: "Animal Flow Workshop", people: "Benjamin Beiersdorf", url: "https://catcow.de/animal-flow-lisa-sofia/", cat: "workshop" },
+      { time: "19.00–21.00", location: "Cathouse", title: "Schamanischer Trommel-Seelengesang-Musizierkreis", people: "Mariann", url: "https://catcow.de/schamanischer-trommel-seelengesang-musizierkreis-mariann/", cat: "kreis", description: "Lasst uns trommeln, singen, musizieren, tanzen und uns mit Pacha Mama und den Spirits verbinden. Wir laden die heilende Energie der Trommel, unserer Stimmen und der Musik aus unseren Herzen ein." },
+      { time: "20.30–00.00", location: "Cathouse", title: "Tantrischer Tempelabend – Reise in die liebevolle Sinnlichkeit", people: "Cornelia & Franz", url: "https://catcow.de/tantra-temple-eine-reise-in-die-sinnlichkeit-cornelia-franz/", cat: "workshop", description: "Entspanne und errege dich in einem liebe- und lichtvollen sicheren Raum und begegne dir und den wunderschönen Wesen um dich in tiefer, sinnlicher Freiheit." },
+      { time: "08.15–09.45", location: "Om Tempel", title: "Achtsamkeit gegen Angst", people: "Markus Kube", url: "https://catcow.de/achtsamkeit-gegen-angst-markus-kube/", cat: "meditation", description: "Lerne Ansätze und Techniken für einen hilfreichen Umgang mit Angst kennen, die dir auf dem Weg zu einem selbstbestimmten Leben helfen: Identifizieren und Benennen der Ängste, Instantachtsamkeitsübungen für Handlungsfähigkeit bei starker Angst, sowie ein ganzheitlicher Ansatz aus Theorie, Achtsamkeitstechniken und Selbstreflektion. Tagebuch oder Schreibzeug mitbringen empfohlen." },
+      { time: "10.15–11.45", location: "Om Tempel", title: "Herzkohärenz Meditation", people: "Marion Schneider", url: "https://catcow.de/herzkohaerenz-lightcodes-marion/", cat: "meditation", description: "Eine Seelenreise mit Marion – Deine HerzensflüsterinHerzkohärenz & Lightcodes – Marion\nEs gibt einen Ort in dir, der still ist. Der weiß, der fühlt, bevor der Verstand versteht." },
+      { time: "12.15–13.45", location: "Om Tempel", title: "Animal Flow Workshop", people: "Benjamin Beiersdorf", url: "https://catcow.de/animal-flow-lisa-sofia/", cat: "workshop", description: "Eine spielerische, kreative Einheit inspiriert von der Tierwelt. Verbessere Beweglichkeit, Kraft und Koordination durch freudvolle Bewegung – geeignet für alle Altersgruppen!" },
       { time: "16.00–18.00", location: "Om Tempel", title: "\"Poetry of Touch\"", people: "Benjamin Joon", url: "", cat: "workshop" },
       { time: "18.20–20.00", location: "Om Tempel", title: "Slowsex Vortrag", people: "Leo", url: "", cat: "workshop" },
       { time: "08.15–09.45", location: "Saustall", title: "Yoga für Resilienz & Stressabbau", people: "Lena Klob", url: "", cat: "yoga" },
       { time: "10.15–11.45", location: "Saustall", title: "Yoga für Anfänger", people: "Anett Weissbecker", url: "", cat: "yoga" },
-      { time: "12.15–13.45", location: "Saustall", title: "Ashtanga 2.Serie", people: "Ronald Steiner", url: "https://catcow.de/yoga-doc-ronald-steiner/", cat: "yoga" },
-      { time: "16.15–17.45", location: "Saustall", title: "Yogilates", people: "Isabell Kerl", url: "https://catcow.de/yogilates-pilates-trifft-yoga-isabel/", cat: "yoga" },
-      { time: "18.15–19.45", location: "Saustall", title: "Tantra Yoga", people: "Siri Nirmal", url: "https://catcow.de/tantra-yoga-vortrag-aura-siri-nirmal/", cat: "yoga" },
+      { time: "12.15–13.45", location: "Saustall", title: "Ashtanga 2.Serie", people: "Ronald Steiner", url: "https://catcow.de/yoga-doc-ronald-steiner/", cat: "yoga", description: "Der „Yoga Doc“ Dr. Ronald Steiner ist Begründer der AYI Methode. Sie verbindet traditionellen Ashtanga Yoga mit innovativer Yogatherapie und lebendiger Philosophie – für eine sehr persönliche Praxis von sportlich-akrobatisch bis meditativ-therapeutisch." },
+      { time: "16.15–17.45", location: "Saustall", title: "Yogilates", people: "Isabell Kerl", url: "https://catcow.de/yogilates-pilates-trifft-yoga-isabel/", cat: "yoga", description: "In dieser 75-minütigen Einheit steht die kraftvolle Körperarbeit aus dem Pilates im Mittelpunkt, ergänzt durch ausgewählte Elemente aus dem Yoga. Yogilates: Pilates trifft Yoga – Isabel\nWir beginnen mit einem achtsamen Ankommen und einer kurzen Mobilisation." },
+      { time: "18.15–19.45", location: "Saustall", title: "Tantra Yoga", people: "Siri Nirmal", url: "https://catcow.de/tantra-yoga-vortrag-aura-siri-nirmal/", cat: "yoga", description: "Siri Nirmal is in Sibirien in einer Heilerfamilie geboren und nahe Altai Gebirge aufgewachsen. Seit ihrer Kindheit meistert Siri verschiedene Heilungstechniken wie Dzen, Shamanismus, Kundalini Yoga, Tantra." },
       { time: "09.30–11.00", location: "Strand", title: "Kakaozeremonie", people: "Veda", url: "https://catcow.de/kakaozeremonie-veda-friends/", cat: "kreis" },
-      { time: "11.30–13.30", location: "Strand", title: "Singkreis", people: "Uma & Friends", url: "https://catcow.de/singing-circle-voice-activation-uma-friends/", cat: "yoga" },
-      { time: "16.30–17.45", location: "Strand", title: "Paraden DANCE", people: "Root Boys", url: "https://catcow.de/rootboys-konzert/", cat: "musik" },
+      { time: "11.30–13.30", location: "Strand", title: "Singkreis", people: "Uma & Friends", url: "https://catcow.de/singing-circle-voice-activation-uma-friends/", cat: "yoga", description: "In diesem Singing Circle öffnen wir gemeinsam einen Raum für Verbindung, Präsenz und lebendige Stimme. Singing Circle & Voice Activation – Uma & Friends\nDurch einfache Lieder, Klänge und gemeinsames Tönen tauchen wir aus dem Kopf in den Körper und in die Tiefe unserer Seele ein." },
+      { time: "16.30–17.45", location: "Strand", title: "Paraden DANCE", people: "Root Boys", url: "https://catcow.de/rootboys-konzert/", cat: "musik", description: "Mit ihren New Roots Reggae tunes laden die 4 Freunde zum Tanzen und\nTräumen ein. Rootboys – Konzert\nMit dem Motto „No More Un‘Aware“ stoßen sie Themen an wie\ndie Selbstentwicklung, die Liebe, das Dasein und vieles mehr." },
       { time: "21.00", location: "Strand", title: "Konzert", people: "Felix & Maxi Hoffmann", url: "", cat: "kreis" },
-      { time: "07.30–08.30", location: "Freundeskreis", title: "Qi Gong", people: "Monique Hunger", url: "https://catcow.de/qi-gong-monique/", cat: "yoga" },
-      { time: "10.00–11.40", location: "Freundeskreis", title: "lebendiges Mandala", people: "Vicky", url: "https://catcow.de/lebendiges-mandala-vicky/", cat: "workshop" },
-      { time: "10.00–11.30", location: "Freundeskreis", title: "Waldbaden Workshop", people: "Anja Brodersen", url: "https://catcow.de/waldyoga-waldbaden-anja/", cat: "workshop" },
-      { time: "11.30–13.00", location: "Freundeskreis", title: "Radiästhesie-Workshop – Bau & Anwendung von Zweihandruten", people: "Marco Hellgott", url: "https://catcow.de/radiaesthesie-workshop-bau-und-anwendung-von-zweihandruten-marco/", cat: "workshop" },
-      { time: "16.30–18.00", location: "Freundeskreis", title: "Waldyoga", people: "Anja Brodersen", url: "https://catcow.de/waldyoga-waldbaden-anja/", cat: "yoga" },
+      { time: "07.30–08.30", location: "Freundeskreis", title: "Qi Gong", people: "Monique Hunger", url: "https://catcow.de/qi-gong-monique/", cat: "yoga", description: "Qi Gong ist eine jahrtausendealte Praxis, die Körper und Geist in\nEinklang bringt. Qi Gong – Monique\nMit sanften Bewegungen, Atemübungen und meditativer\nKonzentration unterstützt Qi Gong die Gesundheit, erhöht das\nWohlbefinden und hilft dabei, den Tag zentriert und gestärkt…" },
+      { time: "10.00–11.40", location: "Freundeskreis", title: "lebendiges Mandala", people: "Vicky", url: "https://catcow.de/lebendiges-mandala-vicky/", cat: "workshop", description: "Das „Lebendige Mandala“\nHand in Hand mit der Kraft aus der MitteLebendiges Mandala – Vicky\nZum einchecken, losreisen & Landen setzen wir das Fundament durch den\nheilsamen nährenden Sonnengruẞ." },
+      { time: "10.00–11.30", location: "Freundeskreis", title: "Waldbaden Workshop", people: "Anja Brodersen", url: "https://catcow.de/waldyoga-waldbaden-anja/", cat: "workshop", description: "Waldyoga & Waldbaden – Anja\nWaldyoga – Flow zwischen BäumenStell dir vor: weicher Waldboden unter deinen Füßen, frische Luft in deinen Lungen und sanfte Bewegungen im Einklang mit der Natur." },
+      { time: "11.30–13.00", location: "Freundeskreis", title: "Radiästhesie-Workshop – Bau & Anwendung von Zweihandruten", people: "Marco Hellgott", url: "https://catcow.de/radiaesthesie-workshop-bau-und-anwendung-von-zweihandruten-marco/", cat: "workshop", description: "In diesem Workshop bauen die Teilnehmer ihre eigene Zweihandrute und erhalten eine praktische Einführung in die Radiästhesie. Durch achtsame Übungen in der Natur lernen sie, ihre Wahrnehmung zu verfeinern und die subtilen Impulse ihrer Umgebung bewusst zu erfahren." },
+      { time: "16.30–18.00", location: "Freundeskreis", title: "Waldyoga", people: "Anja Brodersen", url: "https://catcow.de/waldyoga-waldbaden-anja/", cat: "yoga", description: "Waldyoga & Waldbaden – Anja\nWaldyoga – Flow zwischen BäumenStell dir vor: weicher Waldboden unter deinen Füßen, frische Luft in deinen Lungen und sanfte Bewegungen im Einklang mit der Natur." },
       { time: "09.15–11.00", location: "Kräuterweide", title: "Fungi Fundamentals, Heilpilze vor deiner Haustür", people: "Maximilian Stolze", url: "", cat: "workshop" },
-      { time: "11.30–13.30", location: "Kräuterweide", title: "Permakultur", people: "Humushüter", url: "https://catcow.de/permakultur-mit-dem-humushueter-willy/", cat: "workshop" },
-      { time: "16.15–18.15", location: "Kräuterweide", title: "Hands on Hearts", people: "Julia Krause Wahl", url: "https://catcow.de/hands-on-heart-julia/", cat: "workshop" },
+      { time: "11.30–13.30", location: "Kräuterweide", title: "Permakultur", people: "Humushüter", url: "https://catcow.de/permakultur-mit-dem-humushueter-willy/", cat: "workshop", description: "Ich bin Willy Schnell, Humushüter und leidenschaftlicher Bodenfreund. In meinem Vortrag geht es um die Kraft gesunder Böden – das unsichtbare Fundament allen Lebens." },
+      { time: "16.15–18.15", location: "Kräuterweide", title: "Hands on Hearts", people: "Julia Krause Wahl", url: "https://catcow.de/hands-on-heart-julia/", cat: "workshop", description: "Tauche ein in die Welt von “Hands on Hearts” – einem 120-minütigen Workshop, der dich in die faszinierende Arbeit mit dem Körper einführt." },
       { time: "09.00–10.00", location: "Feuerjurte", title: "Daily Sharing", people: "", url: "", cat: "kreis" },
-      { time: "11.00–13.00", location: "Feuerjurte", title: "Knutsch WS", people: "Dana Springborn", url: "https://catcow.de/knutschworkshop-dana/", cat: "workshop" },
-      { time: "16.00–17.30", location: "Feuerjurte", title: "Persönlichkeitsentwicklung", people: "Sadbhuja & Kore", url: "https://catcow.de/persoenlichkeitsentwicklung-sadbhuja-das/", cat: "workshop" },
-      { time: "18.30–20.00", location: "Feuerjurte", title: "Handpan WS", people: "Bert", url: "https://catcow.de/handpan-in-begegnung-die-sprache-des-klangs-bert/", cat: "workshop" },
+      { time: "11.00–13.00", location: "Feuerjurte", title: "Knutsch WS", people: "Dana Springborn", url: "https://catcow.de/knutschworkshop-dana/", cat: "workshop", description: "Knutschen macht glücklich und geht oft im Alltag unter. Knutschworkshop – Dana\nSetze deine Grenzen in der Begegnung mit anderen Menschen. Lerne dich, deinen Körper und deine Wünsche kennen. Wir starten den Workshop mit einem kurzen Wissenschaftlichen Teil." },
+      { time: "16.00–17.30", location: "Feuerjurte", title: "Persönlichkeitsentwicklung", people: "Sadbhuja & Kore", url: "https://catcow.de/persoenlichkeitsentwicklung-sadbhuja-das/", cat: "workshop", description: "Persönlichkeitsentwicklung – Sadbhuja Das\nWie kommt es, dass 2 Menschen die selbe Situation ganz unterschiedlich erfahren und damit umgehen können? Wie bestimmt unser Bewusstsein Entscheidungen, Prioritäten und Beziehung?" },
+      { time: "18.30–20.00", location: "Feuerjurte", title: "Handpan WS", people: "Bert", url: "https://catcow.de/handpan-in-begegnung-die-sprache-des-klangs-bert/", cat: "workshop", description: "In diesem besonderen Handpan-Workshop geht es nicht um Leistung oder musikalisches Können, sondern um Präsenz und Verbindung durch Klang." },
       { time: "11.00–12.15", location: "AcroYoga", title: "AcroYoga Introduction", people: "", url: "", cat: "workshop" },
       { time: "12.30–13.45", location: "AcroYoga", title: "L-Basing AcroYoga Flow Level 1", people: "", url: "", cat: "workshop" },
       { time: "16.00–17.15", location: "AcroYoga", title: "Introduction HighBird", people: "", url: "", cat: "workshop" },
@@ -799,30 +800,30 @@ const FESTIVAL_DATA = [
   {
     day: "Sonntag",
     date: "05.07.2026",
-    special: [{ time: "15.00–16.00", label: "ABSCHLUSSZEREMONIE (Feuerstelle)" }],
+    special: [{"time":"15.00–16.00","label":"ABSCHLUSSZEREMONIE (Feuerstelle)"}],
     slots: [
       { time: "08.30–10.00", location: "Kuhstall", title: "Yin & Yang Yoga mit Handpan", people: "Sandy & Noah", url: "", cat: "yoga" },
-      { time: "10.30–12.30", location: "Kuhstall", title: "Shanta Vira Yoga", people: "Michael Stewart", url: "https://catcow.de/shanta-vira-yoga-michael-stewart/", cat: "yoga" },
-      { time: "13.00–14.30", location: "Kuhstall", title: "Tantra Yoga des Herzens", people: "Bernd & Alexander", url: "https://catcow.de/tantrayoga-des-herzens-alexander-bernd/", cat: "yoga" },
+      { time: "10.30–12.30", location: "Kuhstall", title: "Shanta Vira Yoga", people: "Michael Stewart", url: "https://catcow.de/shanta-vira-yoga-michael-stewart/", cat: "yoga", description: "Der einzigartige Michael J. Stewart ist mit dabei! Er hat seinen ganz eigenen Yogastil kreiert – mit Shanta Vira Yoga reist er um die Welt und lehrt was er gelernt hat." },
+      { time: "13.00–14.30", location: "Kuhstall", title: "Tantra Yoga des Herzens", people: "Bernd & Alexander", url: "https://catcow.de/tantrayoga-des-herzens-alexander-bernd/", cat: "yoga", description: "Freue dich auf diesen einzigartigen Workshop „Tantrayoga des Herzens“, der dich über die Kraft der Lebensenergie (Kundalini) ins Fühlen, in die Begegnung und in die Co-Kreation mit dir selbst und mit anderen bringt." },
       { time: "08.30–10.00", location: "Cathouse", title: "Wild Potential Yoga", people: "Susann Kind", url: "", cat: "yoga" },
-      { time: "10.30–12.30", location: "Cathouse", title: "Black Panther Energie YinYoga", people: "Luisa Henze & Liselle von Herzen", url: "https://catcow.de/evolution-dance-johanna-liselle/", cat: "yoga" },
-      { time: "13.00–15.00", location: "Cathouse", title: "GATKA – Kampfkunst der neuen Zeit? Spirit der Krieger des Lichts", people: "Rüdiger HarAnand", url: "https://catcow.de/soma-tantra-kundalini-gatka-ruediger-har-anand/", cat: "workshop" },
-      { time: "08.45–09.45", location: "Om Tempel", title: "Animal Flow", people: "Lisa Sofia Müller-Welt", url: "https://catcow.de/animal-flow-lisa-sofia/", cat: "yoga" },
-      { time: "10.30–12.00", location: "Om Tempel", title: "Soft Integration Workshop", people: "Nexi", url: "https://catcow.de/soft-integration-workshop-nexi/", cat: "workshop" },
-      { time: "13.00–14.30", location: "Om Tempel", title: "5000 Jahre Meditation", people: "Ronald Steiner", url: "https://catcow.de/yoga-doc-ronald-steiner/", cat: "meditation" },
-      { time: "08.30–10.30", location: "Saustall", title: "Rebozo Yoga", people: "Claudia Gärtner", url: "https://catcow.de/rebozo-frauenkreis-claudia/", cat: "yoga" },
+      { time: "10.30–12.30", location: "Cathouse", title: "Black Panther Energie YinYoga", people: "Luisa Henze & Liselle von Herzen", url: "https://catcow.de/evolution-dance-johanna-liselle/", cat: "yoga", description: "Am Sonntagmorgen darfst du dich durch die Evolution deines Lebens zu Musik bewegen. Wir laden wir dich ein auf eine Reise durch Klang, Bewegung und Stimme. Schritt für Schritt darfst du aufwachen und dich erleben." },
+      { time: "13.00–15.00", location: "Cathouse", title: "GATKA – Kampfkunst der neuen Zeit? Spirit der Krieger des Lichts", people: "Rüdiger HarAnand", url: "https://catcow.de/soma-tantra-kundalini-gatka-ruediger-har-anand/", cat: "workshop", description: "Auch dieses Jahr ist Rüdiger Har Anand wieder mit seiner Trilogie dabei:– SOMAtantra mit Gongpuja – Integration weiblicher und männlicher Aspekt– authentisches Kundalini mit ShamanicWhiteSoundGongmeditation – Transformation im Hier und Jetzt– GATKA – Kampfkunst der neuen Zeit?" },
+      { time: "08.45–09.45", location: "Om Tempel", title: "Animal Flow", people: "Lisa Sofia Müller-Welt", url: "https://catcow.de/animal-flow-lisa-sofia/", cat: "yoga", description: "Eine spielerische, kreative Einheit inspiriert von der Tierwelt. Verbessere Beweglichkeit, Kraft und Koordination durch freudvolle Bewegung – geeignet für alle Altersgruppen!" },
+      { time: "10.30–12.00", location: "Om Tempel", title: "Soft Integration Workshop", people: "Nexi", url: "https://catcow.de/soft-integration-workshop-nexi/", cat: "workshop", description: "Der Integrations-Workshop lädt dich ein, deine Erfahrungen vom Festival bewusst zu reflektieren und zu verankern. In einem geschützten Raum teilen wir Erlebnisse, Erkenntnisse und Gefühle, damit sie ihren Platz in deinem Alltag finden können." },
+      { time: "13.00–14.30", location: "Om Tempel", title: "5000 Jahre Meditation", people: "Ronald Steiner", url: "https://catcow.de/yoga-doc-ronald-steiner/", cat: "meditation", description: "Der „Yoga Doc“ Dr. Ronald Steiner ist Begründer der AYI Methode. Sie verbindet traditionellen Ashtanga Yoga mit innovativer Yogatherapie und lebendiger Philosophie – für eine sehr persönliche Praxis von sportlich-akrobatisch bis meditativ-therapeutisch." },
+      { time: "08.30–10.30", location: "Saustall", title: "Rebozo Yoga", people: "Claudia Gärtner", url: "https://catcow.de/rebozo-frauenkreis-claudia/", cat: "yoga", description: "Frauenkreis „Wurzeln der Ahnen“Rebozo – Yoga & Massage\n„Getragen & Gehalten“Rebozo & Frauenkreis – Claudia\nRebozoZur Ruhe kommen, sich fallen lassen, getragen werden, gehalten sein, ummantelt, beschützt – das alles und noch viel mehr kannst du im Tuch erfahren!" },
       { time: "11.00–13.00", location: "Saustall", title: "Ayuvedic Breathwork", people: "Steffi Huhn", url: "", cat: "workshop" },
-      { time: "13.30–15.00", location: "Saustall", title: "Flow Vinyasa", people: "Kira Ernst", url: "https://catcow.de/soul-flow-kira/", cat: "yoga" },
-      { time: "05.00", location: "Strand", title: "Agnihotra – vedisches Feuerritual", people: "Felix & Maxi Hoffmann", url: "https://catcow.de/agnihotra-vedisches-feuerritual-maxi-felix/", cat: "kreis" },
-      { time: "09.00–11.00", location: "Strand", title: "LachYoga", people: "Björn Alexander", url: "https://catcow.de/lachyoga-bjoern-alex/", cat: "yoga" },
+      { time: "13.30–15.00", location: "Saustall", title: "Flow Vinyasa", people: "Kira Ernst", url: "https://catcow.de/soul-flow-kira/", cat: "yoga", description: "Yoga Style: Vinyasa, RestorativeSoul Flow – Kira\nReconnect with your inner self through a deep, dance-like flow guided by the rhythm of your breath. In Sanskrit, the soul is referred to as Atman — the true self beyond identification." },
+      { time: "05.00", location: "Strand", title: "Agnihotra – vedisches Feuerritual", people: "Felix & Maxi Hoffmann", url: "https://catcow.de/agnihotra-vedisches-feuerritual-maxi-felix/", cat: "kreis", description: "Agnihotra ist ein uraltes vedisches Feuerritual, das traditionell exakt zu den energetischen Wendepunkten des Tages – dem Sonnenaufgang und dem Sonnenuntergang – praktiziert wird." },
+      { time: "09.00–11.00", location: "Strand", title: "LachYoga", people: "Björn Alexander", url: "https://catcow.de/lachyoga-bjoern-alex/", cat: "yoga", description: "Mehr als Glückshormone – Trainings für Atmen und Lachen (TAL)Lachyoga – Björn-Alex\nBei diesem Angebot werden fast alle Körperzellen in Schwung gebracht." },
       { time: "11.30–14.30", location: "Strand", title: "Conscious Tanning", people: "Blissdorf Family", url: "", cat: "workshop" },
-      { time: "12.30–12.50", location: "Freundeskreis", title: "Erdfriedenmeditation", people: "Falk & Nicole", url: "https://catcow.de/erdfrieden-durch-selbstfrieden-falk-nicole/", cat: "meditation" },
-      { time: "13.00–14.30", location: "Freundeskreis", title: "Nature Singing", people: "Laura Meysel", url: "https://catcow.de/nature-singing-laura/", cat: "kreis" },
-      { time: "16.15–18.00", location: "Freundeskreis", title: "The Final Singing Circle Jam", people: "Sarah Creations & Friends", url: "https://catcow.de/abschluss-singkreis-sarah-creations-friends/", cat: "kreis" },
-      { time: "10.00–11.30", location: "Kräuterweide", title: "Neurografisch inspiriertes Zeichnen", people: "Uma Karuna", url: "https://catcow.de/neurografisch-inspiriertes-zeichnen-uma-karuna/", cat: "workshop" },
+      { time: "12.30–12.50", location: "Freundeskreis", title: "Erdfriedenmeditation", people: "Falk & Nicole", url: "https://catcow.de/erdfrieden-durch-selbstfrieden-falk-nicole/", cat: "meditation", description: "Erdfrieden durch Selbstfrieden – Falk & Nicole\nWir heilen unser Herz & Wunden und nutzen dann\ndie Kraft dieser besonderen Technik, die Kraft der Sonne und des Mondes und beeinflussen das Geschehen auf der Erde bewusst mit Liebe." },
+      { time: "13.00–14.30", location: "Freundeskreis", title: "Nature Singing", people: "Laura Meysel", url: "https://catcow.de/nature-singing-laura/", cat: "kreis", description: "Hallo, schön, dass du da bist! Schön, dass wir da sind! Gemeinsam in der Natur.\nVerbundenheit – wer wünschst sich das nicht, auch wenn sie ganz verschiedene Formen annehmen kann?" },
+      { time: "16.15–18.00", location: "Freundeskreis", title: "The Final Singing Circle Jam", people: "Sarah Creations & Friends", url: "https://catcow.de/abschluss-singkreis-sarah-creations-friends/", cat: "kreis", description: "Sunday, Strand 16.15-18.00 Abschlusssingkreis mit Sarah Creations & FriendsAbschluss Singkreis – Sarah Creations & Friends\n🎶 Abschlusssingkreis mit Sarah Creations & Friends 🎶Schließe dich einem von Herzen kommenden Singing Circle an, in dem Stimmen, Präsenz und Geist in einer…" },
+      { time: "10.00–11.30", location: "Kräuterweide", title: "Neurografisch inspiriertes Zeichnen", people: "Uma Karuna", url: "https://catcow.de/neurografisch-inspiriertes-zeichnen-uma-karuna/", cat: "workshop", description: "Uma Karuna (Michele) – Workshop „Neurografisch inspiriertes Zeichnen“ Linien,die deine Seele bewegen.\nTauche ein in die Welt des intuitiven Zeichnens und erlebe, wie fließende Linien, Farben und Formen Gedanken beruhigen und neue Perspektiven sichtbar machen." },
       { time: "12.00–13.30", location: "Kräuterweide", title: "Grhastha Yoga – der Weg des Familienlebens", people: "Marcus Schons", url: "", cat: "yoga" },
       { time: "09.00–10.00", location: "Feuerjurte", title: "Daily Sharing", people: "", url: "", cat: "kreis" },
-      { time: "11.00–12.30", location: "Feuerjurte", title: "Die Kunst der Berührung", people: "Feynali", url: "https://catcow.de/die-kunst-der-beruehrung-in-hingabe-lieben-feynali/", cat: "workshop" },
+      { time: "11.00–12.30", location: "Feuerjurte", title: "Die Kunst der Berührung", people: "Feynali", url: "https://catcow.de/die-kunst-der-beruehrung-in-hingabe-lieben-feynali/", cat: "workshop", description: "Berührung ist eine der ältesten Sprachen der Liebe. Wenn sie aus Präsenz und Achtsamkeit entsteht, kann sie tiefe Entspannung, Vertrauen und Lebendigkeit im Körper wecken." },
       { time: "13.00–14.30", location: "Feuerjurte", title: "Melt 2Gether", people: "Christian Strangfeld", url: "", cat: "workshop" },
       { time: "11.00–12.15", location: "AcroYoga", title: "AcroYoga Surprise Workshop", people: "", url: "", cat: "workshop" },
       { time: "12.30–13.45", location: "AcroYoga", title: "Closing Jam", people: "", url: "", cat: "workshop" },
@@ -988,7 +989,8 @@ const FESTIVAL_DATA = [
             minutes: timeToMinutes(s.time),
             location: s.location,
             title: s.title,
-            people: s.people
+            people: s.people,
+            description: s.description || ''
           });
         }
       });
@@ -1071,7 +1073,7 @@ const FESTIVAL_DATA = [
       const code = encodeFavorites();
       favExportRow.innerHTML = `
         <textarea id="favExportText" rows="3" readonly></textarea>
-        <div class="hint">Code kopieren und z.B. per Nachricht aufs andere Gerät schicken. Dort über "Favoriten importieren" wieder einspielen.</div>
+        <div class="hint">Code kopieren und z.B. per Nachricht aufs andere Gerät schicken. Dort über "Favoriten in anderen Browser importieren" wieder einspielen.</div>
       `;
       const ta = document.getElementById('favExportText');
       ta.value = code;
@@ -1112,6 +1114,102 @@ const FESTIVAL_DATA = [
       favImportInput.style.borderColor = 'var(--rose)';
       favImportInput.placeholder = 'Ungültiger Code – bitte prüfen';
     }
+  });
+
+  // ---------- Calendar export (.ics) ----------
+  function pad2(n) { return String(n).padStart(2, '0'); }
+
+  function parseDateDDMMYYYY(dateStr) {
+    const m = dateStr.match(/(\d{2})\.(\d{2})\.(\d{4})/);
+    if (!m) return null;
+    return { day: parseInt(m[1]), month: parseInt(m[2]), year: parseInt(m[3]) };
+  }
+
+  function parseTimeRange(timeStr) {
+    // Matches "14.00–16.30", "05.00", "Täglich 12.00–15.00", "17.30" etc.
+    const matches = [...timeStr.matchAll(/(\d{1,2})[.:](\d{2})/g)];
+    if (matches.length === 0) return null;
+    const start = { h: parseInt(matches[0][1]), m: parseInt(matches[0][2]) };
+    const end = matches.length > 1 ? { h: parseInt(matches[1][1]), m: parseInt(matches[1][2]) } : null;
+    return { start, end };
+  }
+
+  function toICSDateTime(date, time) {
+    return `${date.year}${pad2(date.month)}${pad2(date.day)}T${pad2(time.h)}${pad2(time.m)}00`;
+  }
+
+  function escapeICSText(s) {
+    return String(s || '').replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
+  }
+
+  function buildICS(events) {
+    const lines = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//CatCow2026//Festival Favoriten//DE',
+      'CALSCALE:GREGORIAN'
+    ];
+    let count = 0;
+    events.forEach((e, i) => {
+      const date = parseDateDDMMYYYY(e.date);
+      const range = parseTimeRange(e.time);
+      if (!date || !range) return; // skip entries without a clear single time (e.g. "Täglich 12.00–15.00")
+      const dtStart = toICSDateTime(date, range.start);
+      let dtEnd;
+      if (range.end) {
+        dtEnd = toICSDateTime(date, range.end);
+      } else {
+        // no end time given - default to 1 hour duration
+        let endH = range.start.h + 1, endM = range.start.m;
+        if (endH >= 24) endH -= 24;
+        dtEnd = toICSDateTime(date, { h: endH, m: endM });
+      }
+      const summary = escapeICSText(e.title);
+      const location = escapeICSText(e.location);
+      let descParts = [];
+      if (e.people) descParts.push(e.people);
+      if (e.description) descParts.push(e.description);
+      const description = escapeICSText(descParts.join('\n\n'));
+      lines.push(
+        'BEGIN:VEVENT',
+        `UID:catcow2026-${i}-${dtStart}@catcow-fav-export`,
+        `DTSTAMP:${dtStart}Z`,
+        `DTSTART;TZID=Europe/Berlin:${dtStart}`,
+        `DTEND;TZID=Europe/Berlin:${dtEnd}`,
+        `SUMMARY:${summary}`,
+        `LOCATION:${location}`,
+        `DESCRIPTION:${description}`,
+        'END:VEVENT'
+      );
+      count++;
+    });
+    lines.push('END:VCALENDAR');
+    return { ics: lines.join('\r\n'), count };
+  }
+
+  const calendarFavBtn = document.getElementById('calendarFavBtn');
+  calendarFavBtn.addEventListener('click', () => {
+    const events = collectFavoritedEvents();
+    if (events.length === 0) {
+      favExportRow.innerHTML = '<div class="hint">Noch keine Favoriten zum Exportieren markiert.</div>';
+      favImportRow.classList.remove('open');
+      favExportRow.classList.add('open');
+      return;
+    }
+    const { ics, count } = buildICS(events);
+    const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'catcow2026-favoriten.ics';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+    favImportRow.classList.remove('open');
+    favExportRow.innerHTML = `<div class="hint">${count} Termin${count === 1 ? '' : 'e'} als Kalenderdatei heruntergeladen. Datei öffnen, um sie in Google Calendar, Apple Kalender oder Outlook zu importieren.</div>`;
+    favExportRow.classList.add('open');
   });
 })();
 </script>
